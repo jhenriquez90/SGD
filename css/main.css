@@ -43,10 +43,11 @@ background-color: #0787c5 !important;
 }
 
 .app-load{
-  position:absolute;
+  position:relative;
   z-index:1;
     margin-right: auto;
     margin-left: auto;
+    margin-top: 500px;
     align-items: center;
   }
   .app-h1{
