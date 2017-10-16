@@ -1,0 +1,308 @@
+
+
+/* ==========================================================================
+   Author's custom styles Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática 
+   ========================================================================== */
+
+
+
+body{
+
+
+    font-family: "Roboto",Roboto-Regular,helvetica;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+  }
+::-webkit-scrollbar {
+background:#fff;
+width:6px;
+
+}
+::-webkit-scrollbar-thumb {
+-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+background-image: -webkit-linear-gradient(top, #0670a3 10%,#0670a3 51%);
+border-radius: 1px;
+}
+::-webkit-scrollbar-track {
+}
+.app-head{
+background-color: #0787c5 !important;
+  color: white;
+  width: auto;
+  font-size: 3rem;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-shadow: -8px 5px 6px rgba(0,0,0,0.5);
+  border-radius: 3px;
+  margin-bottom: 25px; 
+}
+
+.app-load{
+  position:absolute;
+  z-index:1;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+  }
+  .app-h1{
+    color: #ffffff;
+    font-weight: bold;
+  }
+#logo {
+    
+    display: block;
+    width: 100%;
+    min-height: 110px;
+    margin-top: 10px;
+    text-indent: -999em;
+    background: url(../img/pnlogo.png) no-repeat center bottom;
+    background-size: contain;
+    background-position: center;
+}
+   .app-login{    
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left:  auto;
+    margin-right:  auto;
+    padding: 10px;   
+   
+       }
+   .app-footer{
+    padding: 10px;
+    margin-top: 10px;
+    color: #ffffff;
+    background-color:  #0787c5;
+    text-align: center;
+   }
+.navbar-personalizado{
+  background-color: #0787c5;
+ 
+  margin-bottom: 10px;
+  z-index: 1 !important;
+  
+}
+.navbar-personalizado li>a{
+	color: white;
+text-shadow: none;
+margin-top:25px;
+height: 50px;
+border-bottom: none;
+}
+
+.navbar-personalizado li>a:hover{
+  background-color: #2797cd !important;
+
+  border-bottom: 1px solid #0670a3;
+ 
+}
+.navbar-dropdown{
+  background-color: #2797cd !important;
+  
+  text-shadow: none;
+}
+.navbar-dropdown li>a{
+  color: white !important;
+  text-shadow: none;
+border-top: none;
+text-align: center;
+  
+}
+.navbar-dropdown li>a:hover{
+  background-color: #2797cd !important;
+  border-top: 1px solid #2797cd;
+  border-right: 1px solid #0670a3;
+  color: black !important;
+  
+}
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus{
+  background-color: #2797cd !important;
+}
+.app-bar{
+  background-color: #fcfcfc;
+}
+.app-error_foto{
+  border:4px #b71c1c solid !important;
+}
+.app-container{
+	margin-top: 5px;
+	border: 1px #778899 solid;
+	box-shadow: 4px 4px 8px #708090; 
+	border-radius: 5px;
+}
+
+a{
+	text-decoration: none !important;
+}
+.table{
+	box-shadow: 4px 4px 8px #708090; 
+}
+tbody:hover{
+	cursor: pointer;
+	background-color: #2797cd !important;
+  border-bottom: solid 4px #0670a3;
+	color:#fff;
+	font-weight: bold;
+} 
+td{
+	text-align: center;
+}
+th{
+	text-align: center;
+}
+
+.app-pdfimg{
+	width: 50px;
+	height: 50px;
+}
+textarea{
+  resize: none;
+ }
+ #tableArchivo{
+ 	
+  width: 100%;
+  }
+ #recibidos{
+  
+  width: 100%;
+  }
+ #MisArchivos{
+  
+  width: 100%;
+  }
+ 
+#TSearch{
+  margin-top: 5px;
+
+  padding-bottom: 0;
+  width: 1280px;
+  height: auto;
+  border: 1px #778899 solid;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px #708090; 
+}
+#TableSearch{
+    text-align: center;
+
+
+}
+.app-tsearch{
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+#Cbusqueda{
+  margin-left:47%;
+  margin-bottom: 5px;
+ 
+}
+.app-opavanzada{
+  cursor:pointer;
+}
+.app-radios{
+  background-color: #bfbfbf;
+  border: solid 1px #bab8b8;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 40px;
+padding-left:  30px;
+}
+.app-dropdown-menu {
+  background-color: #ffa000 !important;
+
+}
+.app-dropdown-menu li>a{
+  color: #fcfcfc !important;
+}
+.app-dropdown-menu li>a:hover{
+  color: #000 !important;
+}
+
+.app-botonera{
+  width: 500px;
+  position: relative;
+  margin-left: 17%;
+  padding-bottom: 20px;
+}
+.app-table{
+  width: 100%;
+}
+#notificaciones{
+  width: 200px !important;
+ background-color: #0787C5 !important;
+ box-shadow: 4px 8px 8px #708090;
+ border-radius: 5px;
+ float: right; 
+text-align: center; 
+padding: 10px;
+ margin-bottom: 0px; 
+
+
+}
+.app-notificaciones{ 
+color:white;
+}
+.app-notificaciones:hover{
+ color:white; 
+}
+.app-enviar{
+  margin:10px;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+ background-color: #0787C5;
+ color: #ffffff;
+border-bottom-color:#2797cd;
+}
+.nav-tabs > li > a{
+  color: #000000;
+}
+
+.app-catalogo{
+  padding-top: 15px;
+  text-align: center;
+ border: 1px #778899 solid;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px #708090;
+}
+
+/*Media Queries*/
+
+@media only screen and (max-width: 640px) {
+.app-table{
+  overflow-x: scroll;
+  width: 31%;
+}
+
+}
+
+@media only screen and (max-width: 640px) {
+.app-head{
+background-color: #0787c5 !important;
+  color: white;
+  width: 30%;
+  font-size: 2rem;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-shadow: -8px 5px 6px rgba(0,0,0,0.5);
+  border-radius: 3px;
+  margin-bottom: 25px; 
+}
+}
+@media only screen and (max-width: 640px) {
+#TSearch{
+  margin-top: 5px;
+overflow-x: scroll;
+  padding-bottom: 0;
+  width: 31%;
+  height: auto;
+  border: 1px #778899 solid;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px #708090; 
+}
+}
