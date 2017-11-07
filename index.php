@@ -43,7 +43,7 @@ $_SESSION['user'] = "";
          <nav class="navbar navbar-personalizado">
         <div class="container">
           <div class="navbar-header">
-                     <h1 class="app-h1">Dirección Nacional de Telemática</h1>
+                     <h1 class="app-h1">Dirección Policial de Telemática</h1>
           
           </div>
           
