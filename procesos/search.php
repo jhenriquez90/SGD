@@ -24,7 +24,7 @@ if($count>=1){
 echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 <table class="table app-tsearch">
         <thead>
-        <tr >
+        <tr>
             <th>Id</th>
             <th>Nombre del Documento</th>
             <th>Número de Oficio</th>

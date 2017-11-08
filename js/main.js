@@ -274,12 +274,10 @@ $.ajax({
       var num_archive=$('#num_archive').val();
       var num_gabeta=$('#num_gabeta').val();
       var num_fila=$('#num_fila').val();
-      var asignado=$('#asignado').val();
       var estado=$('#estado').val();
-      var fecha=$('#fecha').val();
       var fechai=$('#fechai').val();
       var obs=$('#obs').val();
-      var DataString='id='+id+'&name_docto='+name_docto+'&oficio='+oficio+'&num_archive='+num_archive+'&num_gabeta='+num_gabeta+'&num_fila='+num_fila+'&asignado='+asignado+'&estado='+estado+'&fecha='+fecha+'&fechai='+fechai+'&obs='+obs;
+      var DataString='id='+id+'&name_docto='+name_docto+'&oficio='+oficio+'&num_archive='+num_archive+'&num_gabeta='+num_gabeta+'&num_fila='+num_fila+'&estado='+estado+'&fechai='+fechai+'&obs='+obs;
       $.ajax({
       type:"POST",
       url:"../procesos/editarchivo",
