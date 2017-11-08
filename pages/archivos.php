@@ -218,7 +218,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
 
 <tbody>
 
-<tr>
+<tr bgcolor="<?php if($ObtenerArchivos[$i]['url']==""){ echo '#efe44c';}?>">
     <td><?php echo $i; ?></td>
     <td><?php echo $ObtenerArchivos[$i]['name_docto']; ?></td>
      <td><?php echo $ObtenerArchivos[$i]['oficio']; ?></td>
@@ -238,7 +238,9 @@ $ObtenerRestringir=$obj_1->getrestringir();
     Acción <span class="caret"></span>
   </button>
   <ul class="dropdown-menu app-dropdown-menu">
+    <?php if($ObtenerArchivos[$i]['url']!=""){?>   
   <li ><a href="enviar?id=<?php echo $ObtenerArchivos[$i]['id_docto']; ?>" class="">Enviar</a></li>
+    <?php }else{ echo '<li><a class="label label-danger">Falta Archivo</a></li>';}?>
   <?php if($ObtenerRestringir[$p]['editar']==1){?>
     <li data="<?php echo $ObtenerArchivos[$i]['id_docto']; ?>" ><a href="#" class="edit">Editar</a></li>
     <?php } ?>
