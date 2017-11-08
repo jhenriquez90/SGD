@@ -188,6 +188,29 @@ $.ajax({
 
 });
 });
+$('.EnviarResp').on('click',function(){
+var option1=$('input:radio[name=optionsRadios]:checked').val();
+var id=$('#id').val();
+var dataString='id='+id+'&option1='+option1;
+$.ajax({
+type:"POST",
+url:"../procesos/mresp",
+data:dataString,
+success:function(a){
+if(a==1){
+
+  obtenerDialog('Nota','Se respondio al Documento Correctamente');
+  $('#aceptar').on('click',function(){
+          document.location.href = 'archivos'; 
+        });
+}else{
+  obtenerDialog('Error','No se logro responder Este Documento1');
+}
+
+}
+});
+
+});
 
 /*Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática */
 function obtenerDialog(Nota,Contenido){
