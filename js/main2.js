@@ -129,7 +129,26 @@ $.ajax({
     var departamento=$('#departamentos').val();
     var cargo=$('#cargo').val();
     var DataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw+'&cargo='+cargo+'&unidad='+unidad+'&departamento='+departamento;
-     if(psw==confpsw){
+     if(psw=="" && confpsw==""){
+       $.ajax({
+      type:"POST",
+      url:"../procesos/edituser",
+      data:DataString,
+      success:function(b){
+        if(b==1){
+           obtenerDialog('Nota',' Usuario fue editado');
+      $('#aceptar').on('click',function(){
+          location.reload();
+        });
+    }else{
+       obtenerDialog('Error','No se logro editar el Usuario, '+name+' '+last_name); 
+    }
+
+      }/*2do success*/
+
+    });/*2do ajax*/
+     }
+     else if(psw==confpsw){
       if(psw.length>4 && confpsw.length>4){   
 
     $('#error').removeClass('alert alert-danger').html('');

@@ -527,7 +527,7 @@ $.ajax({
     var departamento=$('#departamentos').val();
     var cargo=$('#cargo').val();
     var DataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw+'&cargo='+cargo+'&unidad='+unidad+'&departamento='+departamento;
-     if(psw==""){
+     if(psw=="" && confpsw==""){
        $.ajax({
       type:"POST",
       url:"../procesos/edituser",
@@ -684,7 +684,8 @@ var Usuarios=$('#Usuarios').val();
 var Cargos=$('#Cargos').val();
 var Catalogo=$('#Catalogo').val();
 var Estado=$('#Estado').val();
-var dataString='iPermiso='+iPermiso+'&Crear='+Crear+'&Editar='+Editar+'&Eliminar='+Eliminar+'&Usuarios='+Usuarios+'&Cargos='+Cargos+'&Catalogo='+Catalogo+'&Estado='+Estado;
+var Respuesta=$('#Respuesta').val();
+var dataString='iPermiso='+iPermiso+'&Crear='+Crear+'&Editar='+Editar+'&Eliminar='+Eliminar+'&Usuarios='+Usuarios+'&Cargos='+Cargos+'&Catalogo='+Catalogo+'&Estado='+Estado+'&Respuesta='+Respuesta;
 $.ajax({
 type:"POST",
 url:"../procesos/makepermiso.php",
@@ -727,7 +728,8 @@ var Usuarios=$('#Usuarios').val();
 var Cargos=$('#Cargos').val();
 var Catalogo=$('#Catalogo').val();
 var Estado=$('#Estado').val()
-var DataString='id='+id+'&iPermiso='+iPermiso+'&Crear='+Crear+'&Editar='+Editar+'&Eliminar='+Eliminar+'&Usuarios='+Usuarios+'&Cargos='+Cargos+'&Catalogo='+Catalogo+'&Estado='+Estado;
+var Respuesta=$('#Respuesta').val();
+var DataString='id='+id+'&iPermiso='+iPermiso+'&Crear='+Crear+'&Editar='+Editar+'&Eliminar='+Eliminar+'&Usuarios='+Usuarios+'&Cargos='+Cargos+'&Catalogo='+Catalogo+'&Estado='+Estado+'&Respuesta='+Respuesta;
 $.ajax({
 type:"POST",
 url:"../procesos/editp.php",

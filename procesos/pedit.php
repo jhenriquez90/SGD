@@ -13,6 +13,7 @@ while($row=mysql_fetch_array($res)){
   $Cargos=$row['cargos'];
   $Catalogo=$row['catalogo'];
   $Estado=$row['estado'];
+  $Respuesta=$row['respuesta'];
 
 
 if($Crear==1){$texto1='Si'; $optionval1=1;}else{$texto1='No'; $optionval1=0;}
@@ -35,6 +36,9 @@ if($Catalogo==1){$texto12='No'; $optionval12=0;}else{$texto12='Si'; $optionval12
 
 if($Estado==1){$texto13='Si'; $optionval13=1;}else{$texto13='No'; $optionval13=0;}
 if($Estado==1){$texto14='No'; $optionval14=0;}else{$texto14='Si'; $optionval14=1;}
+
+if($Respuesta==1){$texto15='Si'; $optionval15=1;}else{$texto15='No'; $optionval15=0;}
+if($Respuesta==1){$texto16='No'; $optionval16=0;}else{$texto16='Si'; $optionval16=1;}
 
 echo '<div class="form-group">
     <label for="iPermiso">Nombre del Cargo</label>
@@ -87,6 +91,13 @@ echo '<div class="form-group">
 <select class="form-control" name="Estado" id="Estado">
   <option value="'.$optionval13.'">'.$texto13.'</option>
   <option value="'.$optionval14.'">'.$texto14.'</option>
+</select>
+</div>
+<div class="form-group">
+<label for="Respuesta">Respuesta</label>
+<select class="form-control" name="Respuesta" id="Respuesta">
+  <option value="'.$optionval15.'">'.$texto15.'</option>
+  <option value="'.$optionval16.'">'.$texto16.'</option>
 </select>
 </div>
 <input type="hidden" name="id" id="id" value="'.$id.'">';

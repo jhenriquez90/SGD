@@ -58,4 +58,12 @@
 	<option value="0">No</option>
 </select>
 </div>
+<div class="form-group">
+<label for="Respuesta">Respuesta</label>
+<select class="form-control" name="Respuesta" id="Respuesta">
+	<option value="" disabled selected>---</option>
+	<option value="1">Si</option>
+	<option value="0">No</option>
+</select>
+</div>
 <div id="modalDialog"></div>
