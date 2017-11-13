@@ -16,7 +16,7 @@ $id=$_GET['id'];
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Archivero</title>
+        <title>GCD</title>
         <link rel="shortcut icon" href="../img/logo.png" />
         <link rel="shortcut icon" href="../img/logo.png" type="image/png" />
         <meta name="description" content="">
@@ -68,47 +68,31 @@ $id=$_GET['id'];
      </header>
         <div class="container app-container">
         <h3 class="app-head">INGRESO DE RESPUESTA A DOCUMENTO PRINCIPAL</h3>
-          <form id="respuesta" name="respuesta" method="post" enctype="multipart/form-data">
-            <div class="row">
-                    
-             <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
-            <div class="form-group">
-            <div class="app-img">
-            <img src="#" alt="" id="img_destino2" class="responsive-img" style="height: 145px; width: 145px; margin:auto; padding: 2px;">
-            </div>
-            <input type="file" style="display:none;" id="mimg2" name="mimg2">
-            <input type="button" value="Elegir Archivo PDF" onclick="document.getElementById('mimg2').click();" class="btn btn-primary app-btnfile">
-            </div>            
-          </div>
-                    
-             <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
-            <div class="form-group">
-            <label>Nombre o Asunto del Documento</label>
-            <input data-toggle="tooltip" data-placement="right" title="Nombre o Asunto del documento" type="text" id="name_docto" name="name_docto" class="form-control">
-            </div>
-            </div>
 
-            <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
-            <div class="form-group">
-            <label>Número de Oficio</label>
-            <input data-toggle="tooltip" data-placement="right" title="Ingrese número de oficio letras y números para identificar el documento" type="text" id="oficio" name="oficio" class="form-control">
+<section id="rbusqueda">
+        <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+         <label>Búsqueda</label>             
+             <div class="input-group">
+             <input data-toggle="tooltip" data-placement="bottom" title="Búsqueda Número de Oficio"  class="form-control" type="text" id="search" name="search" placeholder="Búsqueda...">
+            <div id="RespSearch" class="btn input-group-addon RespSearch" for="search">Buscar</div>
+            </div> 
             </div>
-            </div>
+            </div> 
+        </section>
 
-            <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
-            <div class="form-group">
-            <label>Observación</label>
-            <textarea data-toggle="tooltip" data-placement="right" title="Puede ingresar un pequeño resumen o estado del documento"  id="obs" name="obs" class="form-control" cols="30" rows="10" ></textarea>
-            </div>
-            </div>
-            <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
-           <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
-            <div class="form-group">
-            <input type="submit" id="upload" name="upload" value="Subir" class="btn btn-success">
-            </div>
-            </div>
-            </div>
-          </form>
+         <section id="TSearch2">
+        <div id="TableSearch">
+           
+        </div> 
+           
+
+          <span id="Rbusqueda" class="btn btn-default">Cerrar</span> 
+          
+          
+        </section>
+<input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
+         
 
     
     </div> <!-- /container -->   

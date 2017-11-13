@@ -43,10 +43,11 @@ background-color: #0787c5 !important;
 }
 
 .app-load{
-  position:absolute;
+  position:relative;
   z-index:1;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: 50%;
+    margin-top: -100px;
     align-items: center;
   }
   .app-h1{
@@ -185,11 +186,25 @@ textarea{
   border-radius: 5px;
   box-shadow: 5px 5px 8px #708090; 
 }
+
+#rbusqueda{
+  margin-bottom: 10px;
+}
+
+#TSearch2{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-bottom: 0;
+  width: 100%;
+  height: auto;
+  border: 1px #778899 solid;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px #708090; 
+}
 #TableSearch{
     text-align: center;
-
-
 }
+
 .app-tsearch{
   width: 100%;
   margin-right: auto;
@@ -200,9 +215,21 @@ textarea{
   margin-bottom: 5px;
  
 }
+#Rbusqueda{
+  margin-left:47%;
+  margin-bottom: 5px;
+ 
+}
+.app-divider{
+margin-top: 10px;
+margin-bottom: 10px;
+  border-bottom: 1px #778899 solid;
+ width: 100%;
+}
 .app-opavanzada{
   cursor:pointer;
 }
+
 .app-radios{
   background-color: #bfbfbf;
   border: solid 1px #bab8b8;

@@ -40,36 +40,11 @@ $ObtenerArchivo=$obj_1->getedit();
             </div>
             </div>
 
-            <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
-            <div class="form-group">
-            <label>Receptor</label>
-            <input type="text" id="asignado" name="asignado" class="form-control" value="'.$ObtenerArchivo[$i]['asignado'].'" >
-            </div>
-            </div>
-
-            <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
-            <div class="form-group">
-            <label>Estado</label>
-            <select id="estado" name="estado" class="form-control">
-                <option value="" selected>--</option>
-                <option value="Recibido">Recibido</option>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Enviado">Enviado</option>                    
-            </select>
-            </div>
-            </div>
-
-            <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
-            <div class="form-group">
-            <label>Fecha que Recibió el documento</label>
-            <input type="date" id="fecha" name="fecha" class="form-control" value="'.$ObtenerArchivo[$i]['fecha'].'">
-            </div>
-            </div>
             
             <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   
             <div class="form-group">
-            <label>Fecha de Ingreso del documento al sistema</label>
-            <input type="date" id="fechai" name="fechai" class="form-control" value="'.$ObtenerArchivo[$i]['fechai'].'">
+            <label>Fecha que Recibió el documento</label>
+            <input type="date" id="fechai" name="fechai" class="form-control" value="'.$ObtenerArchivo[$i]['fecha'].'">
             </div>
             </div>
 

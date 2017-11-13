@@ -102,7 +102,8 @@ $ObtenerRestringir=$obj_1->getrestringir();
              <th>Usuarios</th>
              <th>Cargos</th>
              <th>Catalago</th>
-             <th>Estado</th>   
+             <th>Estado</th> 
+             <th>Respuesta</th>  
           </tr>
         </thead>
 <?php
@@ -110,7 +111,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
             ?>
         <tbody>
         <tr>
-        <td><?php echo $ObtenerPermisos[$i]["id"];?> </td>          
+        <td><?php echo $i;?> </td>          
           <td><?php echo $ObtenerPermisos[$i]["ncargo"];?> </td>
            <td><span class="glyphicon <?php if($ObtenerPermisos[$i]["crear"]==1){echo 'glyphicon-ok-circle';}else{echo 'glyphicon-ban-circle';}?> "></span></td>
             <td><span class="glyphicon <?php if($ObtenerPermisos[$i]["editar"]==1){echo 'glyphicon-ok-circle';}else{echo 'glyphicon-ban-circle';}?> "></span></td>
@@ -119,6 +120,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
              <td><span class="glyphicon <?php if($ObtenerPermisos[$i]["cargos"]==1){echo 'glyphicon-ok-circle';}else{echo 'glyphicon-ban-circle';}?> "></span></td>
              <td><span class="glyphicon <?php if($ObtenerPermisos[$i]["catalogo"]==1){echo 'glyphicon-ok-circle';}else{echo 'glyphicon-ban-circle';}?> "></span></td>
               <td><span class="glyphicon <?php if($ObtenerPermisos[$i]["estado"]==1){echo 'glyphicon-ok-circle';}else{echo 'glyphicon-ban-circle';}?> "></span></td>
+               <td><span class="glyphicon <?php if($ObtenerPermisos[$i]["respuesta"]==1){echo 'glyphicon-ok-circle';}else{echo 'glyphicon-ban-circle';}?> "></span></td>
           <td><div class="btn-group">
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Acción <span class="caret"></span>

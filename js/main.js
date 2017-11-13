@@ -70,7 +70,7 @@ $.ajax({
     });
 
 
- $('#img_destino2').attr('src','../img/upload.png').show();
+ $('#img_destino2').attr('src','../img/upload.png').show(); 
  
    $('#mimg2').change(function(){
     $('#img_destino2').attr('src','../img/pdf.png').show();
@@ -223,6 +223,34 @@ var dataString='CriterioBusqueda='+CriterioBusqueda+'&option1='+option1+'&fecha1
 
 });
 
+
+
+$('#TSearch2').hide();  
+$('.RespSearch').on('click',function(e){
+  e.preventDefault();
+  $('#TSearch2').show();  
+  var cargar=$('#TableSearch').html('<div class="app-load"><img src="../img/30.gif" /></div>');
+var CriterioBusqueda=$('#search').val();
+var dataString='CriterioBusqueda='+CriterioBusqueda;
+ $.ajax({
+      type: "POST",
+      url: "../procesos/rsearch",
+    data: dataString,
+      success: function(a) {
+      var ver=a;
+      if(ver!=""){
+      $('#TableSearch').html(ver);        
+
+      }
+     
+
+      }
+
+});
+
+});
+
+
 $('#TSearch').hide();  
 $('.SearchUser').on('click',function(e){
   e.preventDefault();
@@ -248,7 +276,11 @@ var dataString='CriterioBusqueda='+CriterioBusqueda;
 
 });
 
-
+$('#Rbusqueda').on('click',function(e){
+  e.preventDefault();
+$('#TSearch2').hide(); 
+$('#search').val("");
+});
 
 $('#Cbusqueda').on('click',function(e){
   e.preventDefault();
@@ -259,7 +291,8 @@ $('#search').val("");
 $('.edit').on('click',function(){
 var id=$(this).parent().attr('data');
 var dataString='id='+id;
-var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>');
+
+
 $.ajax({
   type:"POST",
   url:"../class/obj_archivo",
@@ -274,12 +307,10 @@ $.ajax({
       var num_archive=$('#num_archive').val();
       var num_gabeta=$('#num_gabeta').val();
       var num_fila=$('#num_fila').val();
-      var asignado=$('#asignado').val();
       var estado=$('#estado').val();
-      var fecha=$('#fecha').val();
       var fechai=$('#fechai').val();
       var obs=$('#obs').val();
-      var DataString='id='+id+'&name_docto='+name_docto+'&oficio='+oficio+'&num_archive='+num_archive+'&num_gabeta='+num_gabeta+'&num_fila='+num_fila+'&asignado='+asignado+'&estado='+estado+'&fecha='+fecha+'&fechai='+fechai+'&obs='+obs;
+      var DataString='id='+id+'&name_docto='+name_docto+'&oficio='+oficio+'&num_archive='+num_archive+'&num_gabeta='+num_gabeta+'&num_fila='+num_fila+'&estado='+estado+'&fechai='+fechai+'&obs='+obs;
       $.ajax({
       type:"POST",
       url:"../procesos/editarchivo",
@@ -311,6 +342,7 @@ var id=$(this).parent().attr('data');
 var dataString='id='+id;
 EditArchivo('Eliminar','¿Deseas eliminar este archivo?');
 $('#Aceptar').on('click',function(){
+  var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>');
 $.ajax({
   type:"POST",
   url:"../procesos/delarchivo",
@@ -497,7 +529,7 @@ $.ajax({
     var departamento=$('#departamentos').val();
     var cargo=$('#cargo').val();
     var DataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw+'&cargo='+cargo+'&unidad='+unidad+'&departamento='+departamento;
-     if(psw==""){
+     if(psw=="" && confpsw==""){
        $.ajax({
       type:"POST",
       url:"../procesos/edituser",
@@ -549,6 +581,72 @@ $.ajax({
 });
 
 });
+
+$('#mperfiledit').on('click',function(){
+   var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>');   
+var id=$('#id').val();
+    var name=$('#name').val();
+    var last_name=$('#last_name').val();
+    var user=$('#user').val();
+    var psw=$('#psw').val();
+    var confpsw=$('#confpsw').val();
+var dataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw;
+
+
+     if(psw=="" && confpsw==""){
+       $.ajax({
+      type:"POST",
+      url:"../procesos/editmperfil",
+      data:dataString,
+      success:function(b){
+        if(b==1){
+           obtenerDialog('Nota',' Usuario fue editado');
+      $('#aceptar').on('click',function(){
+          location.reload();
+        });
+    }else{
+       obtenerDialog('Error','No se logro editar el Usuario, '+name+' '+last_name); 
+    }
+
+      }/*2do success*/
+
+    });/*2do ajax*/
+     }
+     else if(psw==confpsw){
+      if(psw.length>4 && confpsw.length>4){   
+
+    $('#error').removeClass('alert alert-danger').html('');
+    $.ajax({
+      type:"POST",
+      url:"../procesos/editmperfil",
+      data:dataString,
+      success:function(b){
+        if(b==1){
+           obtenerDialog('Nota',' Usuario fue editado');
+      $('#aceptar').on('click',function(){
+          location.reload();
+        });
+    }else{
+       obtenerDialog('Error','No se logro editar el Usuario, '+name+' '+last_name); 
+    }
+
+      }/*2do success*/
+
+    });/*2do ajax*/
+    }else{
+            $('#error').addClass('alert alert-danger').html('La contraseña debe ser mayor a 4 caracteres');
+          }
+          }else{
+            $('#error').addClass('alert alert-danger').html('Contraseñas no coinciden');
+
+          }
+});
+
+
+
+
+
+
 
 $('#unidades').change(function(e){ 
   e.preventDefault();
@@ -654,7 +752,8 @@ var Usuarios=$('#Usuarios').val();
 var Cargos=$('#Cargos').val();
 var Catalogo=$('#Catalogo').val();
 var Estado=$('#Estado').val();
-var dataString='iPermiso='+iPermiso+'&Crear='+Crear+'&Editar='+Editar+'&Eliminar='+Eliminar+'&Usuarios='+Usuarios+'&Cargos='+Cargos+'&Catalogo='+Catalogo+'&Estado='+Estado;
+var Respuesta=$('#Respuesta').val();
+var dataString='iPermiso='+iPermiso+'&Crear='+Crear+'&Editar='+Editar+'&Eliminar='+Eliminar+'&Usuarios='+Usuarios+'&Cargos='+Cargos+'&Catalogo='+Catalogo+'&Estado='+Estado+'&Respuesta='+Respuesta;
 $.ajax({
 type:"POST",
 url:"../procesos/makepermiso.php",
@@ -697,7 +796,8 @@ var Usuarios=$('#Usuarios').val();
 var Cargos=$('#Cargos').val();
 var Catalogo=$('#Catalogo').val();
 var Estado=$('#Estado').val()
-var DataString='id='+id+'&iPermiso='+iPermiso+'&Crear='+Crear+'&Editar='+Editar+'&Eliminar='+Eliminar+'&Usuarios='+Usuarios+'&Cargos='+Cargos+'&Catalogo='+Catalogo+'&Estado='+Estado;
+var Respuesta=$('#Respuesta').val();
+var DataString='id='+id+'&iPermiso='+iPermiso+'&Crear='+Crear+'&Editar='+Editar+'&Eliminar='+Eliminar+'&Usuarios='+Usuarios+'&Cargos='+Cargos+'&Catalogo='+Catalogo+'&Estado='+Estado+'&Respuesta='+Respuesta;
 $.ajax({
 type:"POST",
 url:"../procesos/editp.php",

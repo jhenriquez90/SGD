@@ -1,15 +1,19 @@
-<?php
+<?php 
 require_once '../class/conexion.php';
 require_once("../class/obj_archivo.php");
 session_start();
 
+$id=$_SESSION['id'];
 if($_SESSION['user']=="")
 {
 header("location:../procesos/logout");
 } 
 $obj_1=new Tarchivos();
+$Obtenernoti=$obj_1->getnoti();
 $ObtenerRestringir=$obj_1->getrestringir();
-$ObtenerUnidades=$obj_1->getUnidades();
+
+$sql="Select*from login where id=$id";
+$res=mysql_query($sql,Conectar::con());
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -51,25 +55,29 @@ $ObtenerUnidades=$obj_1->getUnidades();
             <span class="icon-bar app-bar"></span>
             <span class="icon-bar app-bar"></span>
           </button>
-           <h1 class="app-h1">Dirección Nacional de Telemática</h1>
+           <h1 class="app-h1"><?php echo $_SESSION['nameb']; ?> <br> <?php echo $_SESSION['namec'];?></h1>
           
           </div>
           <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav navbar-right navbar-personalizado">             
-              
-                 
+                 <?php if($ObtenerRestringir[$p]['crear']==1){?>
+                
+                 <?php } ?>  
                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href=""> <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['nombre']."&nbsp".$_SESSION['apellido']; ?> <span class="caret Qs"></span></a>
               <ul class="dropdown-menu navbar-dropdown">
-              <li><a href="archivos">Archivos</a></li>
-              <?php if($ObtenerRestringir[$p]['usuarios']==1){?>
+                 <li><a href="archivos">Archivos</a></li>
+                            <?php if($ObtenerRestringir[$p]['usuarios']==1){?>
                <li><a href="usuarios">Usuarios</a></li>
                <?php } ?>
                <?php if($ObtenerRestringir[$p]['cargos']==1){?>
                <li><a href="permisos">Cargos</a></li>
                 <?php } ?>
-                <?php if($ObtenerRestringir[$p]['estado']==1){?> 
-                <li><a href="estado">Estado</a></li>
-                <?php } ?>
+                <?php if($ObtenerRestringir[$p]['catalogo']==1){?>
+               <li><a href="catalogo">Catalago</a></li> 
+               <?php } ?>  
+               <?php if($ObtenerRestringir[$p]['estado']==1){?> 
+               <li><a href="estado">Estado</a></li> 
+               <?php } ?>           
                <li role="separator" class="divider"></li>
               <li><a href="../procesos/logout">Cerrar Sesion</a></li>
               </ul>
@@ -87,44 +95,43 @@ $ObtenerUnidades=$obj_1->getUnidades();
       </nav>
      </header>
 
-        <div class="container" >
-        <div class="row app-catalogo">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          <div class="form-group">
-        <label for="unid">Unidades</label>
-        <button id="unid" class="btn btn-primary" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Crear</button>
-       </div>
-       </div>
-       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-       <div class="form-group">
-        <label for="dep">Departamentos</label>
-        <button id="dep" class="btn btn-primary" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Crear</button>
-       </div>
-       </div>
+        <div class="jumbotron">
+  <div class="container">
 
-       </div>
-
-        <!--<div class="form-group">
-        <label for="unidades">Unidades</label>
-        <select id="unidades" name="unidades" class="form-control">
-          <option value="" disabled selected >---</option>
-          <?php for($i=0;$i<sizeof($ObtenerUnidades);$i++) {?>
-          <option value="<?php echo $ObtenerUnidades[$i]['id'] ?>"><?php echo $ObtenerUnidades[$i]['nombre'] ?></option>
-
-
-          <?php } ?>
-           </select>
-<div id="deptos" class="form-group">
-<label for="departamentos">Departamentos</label>
-  
+  <?php while($row=mysql_fetch_array($res)) : ?>
+<label></label>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+<div class="form-group">
+<label for="name">Nombre</label>
+   <input type="text" class="form-control" id="name" name="name" value="<?php echo $row['name']; ?>">
 </div>
+<div class="form-group">
+<label for="last_name">Apellido</label>
+  <input type="text" class="form-control" id="last_name" value="<?php echo $row['last_name']; ?>">
+</div>
+<div class="form-group">
+  <label for="user">Usuario</label>
+  <span name="user" id="user" class="form-control"><?php echo $row['user']; ?></span>
+  </div>
+<div class="form-group">
+<label for="psw">Contraseña</label>
+  <input class="form-control" type="password" id="psw" >
+</div>
+<div class="form-group">
+<label for="confpsw">Confirmar Contraseña</label>
+  <input type="password" class="form-control" id="confpsw" >
+</div>
+<input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>">
 
-       
-       </div>-->
-        </div> <!-- /container -->   
+<button class="btn btn-primary" id="mperfiledit" name="mperfiledit">Editar</button>
+  <?php endwhile; ?>
+  </div>
+</div> <!-- /container -->
+</div>   
     <div id="modalDialog">
       
     </div>
+    <div id="error"></div>
     <?php } ?>
 <!--Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática -->   
 <footer class="app-footer">

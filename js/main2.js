@@ -129,7 +129,26 @@ $.ajax({
     var departamento=$('#departamentos').val();
     var cargo=$('#cargo').val();
     var DataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw+'&cargo='+cargo+'&unidad='+unidad+'&departamento='+departamento;
-     if(psw==confpsw){
+     if(psw=="" && confpsw==""){
+       $.ajax({
+      type:"POST",
+      url:"../procesos/edituser",
+      data:DataString,
+      success:function(b){
+        if(b==1){
+           obtenerDialog('Nota',' Usuario fue editado');
+      $('#aceptar').on('click',function(){
+          location.reload();
+        });
+    }else{
+       obtenerDialog('Error','No se logro editar el Usuario, '+name+' '+last_name); 
+    }
+
+      }/*2do success*/
+
+    });/*2do ajax*/
+     }
+     else if(psw==confpsw){
       if(psw.length>4 && confpsw.length>4){   
 
     $('#error').removeClass('alert alert-danger').html('');
@@ -187,6 +206,29 @@ $.ajax({
 });
 
 });
+});
+$('.EnviarResp').on('click',function(){
+var option1=$('input:radio[name=optionsRadios]:checked').val();
+var id=$('#id').val();
+var dataString='id='+id+'&option1='+option1;
+$.ajax({
+type:"POST",
+url:"../procesos/mresp",
+data:dataString,
+success:function(a){
+if(a==1){
+
+  obtenerDialog('Nota','Se respondio al Documento Correctamente');
+  $('#aceptar').on('click',function(){
+          document.location.href = 'archivos'; 
+        });
+}else{
+  obtenerDialog('Error','No se logro responder Este Documento1');
+}
+
+}
+});
+
 });
 
 /*Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática */

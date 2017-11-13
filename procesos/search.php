@@ -38,22 +38,30 @@ echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
         /*Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática */
          for ($p=0; $p <sizeof($ObtenerRestringir) ; $p++) { 
       while($reg=mysql_fetch_array($res)){
-echo  '<tbody>
-<tr>
-    <td>'.$reg['id_docto'].'</td>
+echo  '<tbody>';
+if($reg['url']==""){
+echo '<tr bgcolor="#efe44c">';
+}
+  echo '<td>'.$reg['id_docto'].'</td>
     <td>'.$reg['name_docto'].'</td>
     <td>'.$reg['oficio'].'</td>
     <td>'.date("d/m/Y ",strtotime($reg['fecha'])).'</td>
     <td>'.$reg['asignado'].'</td>
     <td>'.$reg['obs'].'</td>    
-     <td data="'.$reg['id_docto'].'"><span class="ver glyphicon glyphicon-eye-open"></span></td>
-        <td><a target="_blank" href="'.$reg['url'].'"><img class="app-pdfimg" src="../img/pdf.png"></a></td>
-         <td><div class="btn-group">
+     <td data="'.$reg['id_docto'].'"><span class="ver glyphicon glyphicon-eye-open"></span></td>';
+     if($reg['url']!=""){
+       echo '<td><a target="_blank" href="'.$reg['url'].'"><img class="app-pdfimg" src="../img/pdf.png"></a></td>';
+        }else{ echo '<td data="'.$reg['id_docto'].'"><a class="plus" href="#"><img class="app-pdfimg" src="../img/spdf.png"></a></td>';}
+         echo '<td><div class="btn-group">
+             
+     
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Acción <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu app-dropdown-menu">
-    <li><a href="enviar?id='.$reg['id_docto'].'" class="">Enviar</a></li>';
+  <ul class="dropdown-menu app-dropdown-menu">';
+  if($reg['url']!=""){
+    '<li><a href="enviar?id='.$reg['id_docto'].'" class="">Enviar</a></li>';
+  }else{echo '<li><a class="label label-danger">Falta Archivo</a></li>'; }
     if($ObtenerRestringir[$p]['editar']==1){
    echo '<li data="'.$reg['id_docto'].'"><a href="#" class="edit2">Editar</a></li>';
      }

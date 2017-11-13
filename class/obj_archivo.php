@@ -91,7 +91,7 @@ while($reg = mysql_fetch_assoc($res)){
 public function getrespuesta(){
 	$id=$_POST['id'];
 	
-	$sql="SELECT a.id_resp,a.id_docto,a.name_docto,a.oficio,b.oficio as ofip,a.num_archive,a.num_gabeta,a.num_fila,concat(a.repository,a.archive) as url,a.fecha,a.fechai,a.asignado,a.estado,a.obs FROM respuesta as a right join archivos as b on (a.id_docto=b.id_docto) where a.id_docto= $id";
+	$sql="SELECT a.id_resp,a.id_docto,b.oficio as OficioO,e.nombre as unidades,d.nombre as deptos,a.fecha,b.name_docto,c.oficio as OficioR,concat(c.repository,c.archive)as url FROM respuesta as a right join archivos as b on (a.id_docto=b.id_docto) right join archivos as c on (a.id_resp=c.id_docto) right join departamentos as d on (c.propietario=d.id)right join unidades as e on (d.idunidades=e.id) where a.id_docto= $id";
 $res=mysql_query($sql,Conectar::con());
 while($reg = mysql_fetch_assoc($res)){
 				$this->respuesta[] = $reg;
