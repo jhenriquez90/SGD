@@ -582,6 +582,72 @@ $.ajax({
 
 });
 
+$('#mperfiledit').on('click',function(){
+   var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>');   
+var id=$('#id').val();
+    var name=$('#name').val();
+    var last_name=$('#last_name').val();
+    var user=$('#user').val();
+    var psw=$('#psw').val();
+    var confpsw=$('#confpsw').val();
+var dataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw;
+
+
+     if(psw=="" && confpsw==""){
+       $.ajax({
+      type:"POST",
+      url:"../procesos/editmperfil",
+      data:dataString,
+      success:function(b){
+        if(b==1){
+           obtenerDialog('Nota',' Usuario fue editado');
+      $('#aceptar').on('click',function(){
+          location.reload();
+        });
+    }else{
+       obtenerDialog('Error','No se logro editar el Usuario, '+name+' '+last_name); 
+    }
+
+      }/*2do success*/
+
+    });/*2do ajax*/
+     }
+     else if(psw==confpsw){
+      if(psw.length>4 && confpsw.length>4){   
+
+    $('#error').removeClass('alert alert-danger').html('');
+    $.ajax({
+      type:"POST",
+      url:"../procesos/editmperfil",
+      data:dataString,
+      success:function(b){
+        if(b==1){
+           obtenerDialog('Nota',' Usuario fue editado');
+      $('#aceptar').on('click',function(){
+          location.reload();
+        });
+    }else{
+       obtenerDialog('Error','No se logro editar el Usuario, '+name+' '+last_name); 
+    }
+
+      }/*2do success*/
+
+    });/*2do ajax*/
+    }else{
+            $('#error').addClass('alert alert-danger').html('La contraseña debe ser mayor a 4 caracteres');
+          }
+          }else{
+            $('#error').addClass('alert alert-danger').html('Contraseñas no coinciden');
+
+          }
+});
+
+
+
+
+
+
+
 $('#unidades').change(function(e){ 
   e.preventDefault();
 

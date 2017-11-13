@@ -57,7 +57,7 @@ $ObtenerUnidades=$obj_1->getUnidades();
           <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav navbar-right navbar-personalizado">             
               
-                 <li class="dropdown"><a id="IN" class="app-navbar"  href="#">Ingresar Nuevo</a>
+                 
                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href=""> <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['nombre']."&nbsp".$_SESSION['apellido']; ?> <span class="caret Qs"></span></a>
               <ul class="dropdown-menu navbar-dropdown">
               <li><a href="archivos">Archivos</a></li>
