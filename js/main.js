@@ -291,7 +291,8 @@ $('#search').val("");
 $('.edit').on('click',function(){
 var id=$(this).parent().attr('data');
 var dataString='id='+id;
-var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>');
+
+
 $.ajax({
   type:"POST",
   url:"../class/obj_archivo",
@@ -341,6 +342,7 @@ var id=$(this).parent().attr('data');
 var dataString='id='+id;
 EditArchivo('Eliminar','¿Deseas eliminar este archivo?');
 $('#Aceptar').on('click',function(){
+  var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>');
 $.ajax({
   type:"POST",
   url:"../procesos/delarchivo",
