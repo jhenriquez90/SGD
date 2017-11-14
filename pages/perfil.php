@@ -99,7 +99,7 @@ $res=mysql_query($sql,Conectar::con());
   <div class="container">
 
   <?php while($row=mysql_fetch_array($res)) : ?>
-<label></label>
+<h1>Mi Perfil</h1>
 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 <div class="form-group">
 <label for="name">Nombre</label>
@@ -125,6 +125,9 @@ $res=mysql_query($sql,Conectar::con());
 
 <button class="btn btn-primary" id="mperfiledit" name="mperfiledit">Editar</button>
   <?php endwhile; ?>
+  </div>
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <img src="../img/icon-user.png" class="img-rounded" style="height:240px;width: 240px; ">
   </div>
 </div> <!-- /container -->
 </div>   

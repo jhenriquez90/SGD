@@ -48,7 +48,7 @@ echo '<tr bgcolor="#efe44c">';
     <td>'.date("d/m/Y ",strtotime($reg['fecha'])).'</td>
     <td>'.$reg['asignado'].'</td>
     <td>'.$reg['obs'].'</td>    
-     <td data="'.$reg['id_docto'].'"><span class="ver glyphicon glyphicon-eye-open"></span></td>';
+     <td data="'.$reg['id_docto'].'"><span class="ver2 glyphicon glyphicon-eye-open"></span></td>';
      if($reg['url']!=""){
        echo '<td><a target="_blank" href="'.$reg['url'].'"><img class="app-pdfimg" src="../img/pdf.png"></a></td>';
         }else{ echo '<td data="'.$reg['id_docto'].'"><a class="plus" href="#"><img class="app-pdfimg" src="../img/spdf.png"></a></td>';}
@@ -60,7 +60,7 @@ echo '<tr bgcolor="#efe44c">';
   </button>
   <ul class="dropdown-menu app-dropdown-menu">';
   if($reg['url']!=""){
-    '<li><a href="enviar?id='.$reg['id_docto'].'" class="">Enviar</a></li>';
+    echo '<li><a href="enviar?id='.$reg['id_docto'].'" class="">Enviar</a></li>';
   }else{echo '<li><a class="label label-danger">Falta Archivo</a></li>'; }
     if($ObtenerRestringir[$p]['editar']==1){
    echo '<li data="'.$reg['id_docto'].'"><a href="#" class="edit2">Editar</a></li>';
@@ -123,7 +123,7 @@ echo  '<tbody>
            <td>'.$reg['obs'].'</td>
             <td>'.$fecha=date("d/m/Y h:i:s",strtotime($reg['henviado'])).'</td>
             <td>'.$fecha=date("d/m/Y h:i:s",strtotime($reg['hleido'])).'</td>
-            <td data="'.$reg['id_docto'].'"><span class="ver glyphicon glyphicon-eye-open"></span></td>
+            <td data="'.$reg['id_docto'].'"><span class="ver2 glyphicon glyphicon-eye-open"></span></td>
             <td><a target="_blank" href="'.$reg['url'].'"><img class="app-pdfimg" src="../img/pdf.png"></a></td>
             <td><div class="btn-group">
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -197,7 +197,7 @@ echo  '<tbody>
            <td>'.$reg['obs'].'</td>
             <td>'.$fecha=date("d/m/Y h:i:s",strtotime($reg['henviado'])).'</td>
             <td>'.$fecha=date("d/m/Y h:i:s",strtotime($reg['hleido'])).'</td>
-            <td data="'.$reg['id_docto'].'"><span class="ver glyphicon glyphicon-eye-open"></span></td>
+            <td data="'.$reg['id_docto'].'"><span class="ver2 glyphicon glyphicon-eye-open"></span></td>
             <td><a target="_blank" href="'.$reg['url'].'"><img class="app-pdfimg" src="../img/pdf.png"></a></td>
             <td><div class="btn-group">
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
