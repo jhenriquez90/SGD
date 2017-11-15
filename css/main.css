@@ -296,6 +296,10 @@ border-bottom-color:#2797cd;
   border-radius: 5px;
   box-shadow: 5px 5px 8px #708090;
 }
+.app-count{
+float: right;
+margin-top: 23px !important;
+}
 
 /*Media Queries*/
 

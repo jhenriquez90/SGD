@@ -13,6 +13,7 @@ private $restringir;
 private $archivos;
 private $unidades;
 private $detalle;
+private $SinArchivo;
 
 
 
@@ -28,6 +29,7 @@ public function __construct(){
 	$this->restringir=array();
 	$this->detalle=array();
 	$this->respuesta=array();
+	$this->SinArchivo=array();
 }
 
 
@@ -78,6 +80,15 @@ while($reg = mysql_fetch_assoc($res)){
 		
 }
 
+public function getSinArchivo(){
+		$sql="SELECT count(repository) as Total, (Select count(repository) from archivos where propietario=".$_SESSION['departamento']." and repository='' ) as Conteo  FROM archivos where propietario=".$_SESSION['departamento']." ";
+$res=mysql_query($sql,Conectar::con());
+while($reg = mysql_fetch_array($res)){
+				$this->SinArchivo[] = $reg;
+			}
+			return $this->SinArchivo;
+		
+}
 public function getedit(){
 	$id=$_POST['id'];
 	$sql="select*from archivos where id_docto=$id";
@@ -130,7 +141,7 @@ while($reg = mysql_fetch_assoc($res)){
 
 public function getUnidades(){
 
-$sql="SELECT*FROM unidades";
+$sql="SELECT*FROM unidades order by nombre asc";
 $res=mysql_query($sql,Conectar::con());
 while($reg=mysql_fetch_assoc($res)){
 	$this->unidades[]=$reg;

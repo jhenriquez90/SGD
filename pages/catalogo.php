@@ -60,6 +60,7 @@ $ObtenerUnidades=$obj_1->getUnidades();
                  
                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href=""> <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['nombre']."&nbsp".$_SESSION['apellido']; ?> <span class="caret Qs"></span></a>
               <ul class="dropdown-menu navbar-dropdown">
+                <li><a href="perfil">Mi Perfil</a></li>
               <li><a href="archivos">Archivos</a></li>
               <?php if($ObtenerRestringir[$p]['usuarios']==1){?>
                <li><a href="usuarios">Usuarios</a></li>

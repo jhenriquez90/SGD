@@ -13,6 +13,7 @@ $Obtenernoti=$obj_1->getnoti();
 $Obtenerrecibidos=$obj_1->getrecibidos();
 $ObtenerArchivos=$obj_1->getArchivos();
 $ObtenerRestringir=$obj_1->getrestringir();
+$ObtenerSinArchivo=$obj_1->getSinArchivo();
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -182,13 +183,19 @@ $ObtenerRestringir=$obj_1->getrestringir();
           
         </section>
 
-
+<?php for($a=0; $a<sizeof($ObtenerSinArchivo); $a++){ ?>
+    <div class="app-count label label-default">
+        Registros Sin Archivos <?php echo $ObtenerSinArchivo[$a]['Conteo']; ?> de  <?php echo $ObtenerSinArchivo[$a]['Total']; ?>     
+    </div>
+    <?php } ?>
 <section id="navegacion">
 <ul id="navega" class="nav nav-tabs">
 <li role="presentation" class="active"><a href="#MisArchivos" aria-controls="MisArchivos" role="tab" data-toggle="tab">Archivos</a></li>
  <li role="presentation"><a href="#tableArchivo" aria-controls="tableArchivo" role="tab" data-toggle="tab">Enviados</a></li>
     <li role="presentation"><a href="#recibidos" aria-controls="recibidos" role="tab" data-toggle="tab">Recibidos</a></li>
+ 
 </ul>
+   
 </section>
 
 
@@ -197,6 +204,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
 
 <section id="MisArchivos" class="tab-pane fade in active" role="tabpanel">
   <div class="row">
+   
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-table ">
         <table class="table table-bordered  ">
         <thead>

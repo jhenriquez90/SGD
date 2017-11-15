@@ -73,7 +73,7 @@ $.ajax({
 });/*1er ajax fin*/
 });
 
-$('.ver2').on('click',function(){
+$('.ver').on('click',function(){
 var id=$(this).parent().attr('data');
 var dataString='id='+id;
 $.ajax({
@@ -88,11 +88,7 @@ obtenerDialog('Respuestas',a);
  
 });
 });
-$('.plus').on('click',function(){
-var id=$(this).parent().attr('data');
-document.location.href= '../procesos/subarchivo?id='+id;
 
-});
 $('.detalle').on('click',function(){
   var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>'); 
 var id=$(this).parent().attr('data');

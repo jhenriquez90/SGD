@@ -949,6 +949,26 @@ location.reload();
 });
 
 
+
+$('.paginate').bind('click', function(){
+    
+    $('#modalDialog').html('<div class="loading"><img src="images/loading.gif" width="70px" height="70px"/></div>');
+
+    var page = $(this).attr('data');    
+    var dataString = 'page='+page;
+    
+    $.ajax({
+            type: "GET",
+            url: "../procesos/pagination.php",
+            data: dataString,
+            success: function(data) {
+        $('#modalDialog').fadeIn(1000).html(data);
+            }
+        });
+    });              
+
+
+
 function actualizar(){
 $('.badge').fadeOut("slow").load('../procesos/alert').fadeIn("slow");
 }
