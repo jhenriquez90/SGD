@@ -29,6 +29,10 @@ border-radius: 1px;
 }
 ::-webkit-scrollbar-track {
 }
+.app-a{
+  text-decoration: none;
+  color: white;
+}
 .app-head{
 background-color: #0787c5 !important;
   color: white;
