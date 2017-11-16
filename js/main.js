@@ -29,7 +29,7 @@ var extensiones = archivo.substring(archivo.lastIndexOf("."));
 $.ajax({
                 url: "mupload",
                 type: "post",
-                dataType: "html",
+                dataType: "html", 
                 data: formData,
                 cache: false,
                 contentType: false,

@@ -185,7 +185,7 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
 
 <?php for($a=0; $a<sizeof($ObtenerSinArchivo); $a++){ ?>
     <div class="app-count label label-default">
-        Registros Sin Archivos <?php echo $ObtenerSinArchivo[$a]['Conteo']; ?> de  <?php echo $ObtenerSinArchivo[$a]['Total']; ?>     
+       <h5> Registros Sin Archivos <a class="app-a" href="sinarchivo"><?php echo $ObtenerSinArchivo[$a]['Conteo']; ?></a> de  <?php echo $ObtenerSinArchivo[$a]['Total']; ?> </h5>    
     </div>
     <?php } ?>
 <section id="navegacion">

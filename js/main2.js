@@ -25,6 +25,13 @@ $.ajax({
 
 });
 });  
+
+$('.plus').on('click',function(){
+var id=$(this).parent().attr('data');
+document.location.href= '../procesos/subarchivo?id='+id;
+
+});
+
 $('.edit2').on('click',function(){
 var id=$(this).parent().attr('data');
 var dataString='id='+id;
