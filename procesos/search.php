@@ -60,7 +60,7 @@ echo '<tr bgcolor="#efe44c">';
   </button>
   <ul class="dropdown-menu app-dropdown-menu">';
   if($reg['url']!=""){
-    '<li><a href="enviar?id='.$reg['id_docto'].'" class="">Enviar</a></li>';
+    echo '<li><a href="enviar?id='.$reg['id_docto'].'" class="">Enviar</a></li>';
   }else{echo '<li><a class="label label-danger">Falta Archivo</a></li>'; }
     if($ObtenerRestringir[$p]['editar']==1){
    echo '<li data="'.$reg['id_docto'].'"><a href="#" class="edit2">Editar</a></li>';
