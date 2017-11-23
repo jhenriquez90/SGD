@@ -126,6 +126,10 @@ $res=mysql_query($sql,Conectar::con());
 <button class="btn btn-primary" id="mperfiledit" name="mperfiledit">Editar</button>
   <?php endwhile; ?>
   </div>
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <img src="../img/icon-user.png" class="img-responsive img-rounded" style="width: 350px;height: 350px;">
+    
+  </div>
 </div> <!-- /container -->
 </div>   
     <div id="modalDialog">
