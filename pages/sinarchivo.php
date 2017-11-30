@@ -15,6 +15,13 @@ $ObtenerRestringir=$obj_1->getrestringir();
 
 function getFAQ() {
 $sql = "SELECT id_docto,name_docto,oficio,num_archive,num_gabeta,num_fila,fecha,asignado,concat(repository,archive) as url,obs FROM archivos where propietario=".$_SESSION['departamento']." and repository=' ' order by fecha desc ";
+$ingreso=mysql_query($sql,Conectar::con());
+$fila=mysql_num_rows($ingreso);
+
+if($fila==0){
+
+  header('location:archivos');
+}
 
 // getting parameters required for pagination
 $currentPage = 1;
@@ -28,9 +35,12 @@ $href = "sinarchivo?";
 //adding limits to select query
 $query =  $sql . " limit " . $startPage . "," . PERPAGE_LIMIT; 
 $result = mysql_query($query,Conectar::con());
+
 while($row=mysql_fetch_array($result)) {
 $questions[] = $row;
+
 }
+
 
 if(is_array($questions)){
 $questions["page_links"] = paginateResults($sql,$href);
@@ -250,7 +260,7 @@ for($i=0;$i<count($questions)-1;$i++) {
 <?php
 }
 ?>
-</body>
+
 <footer class="app-footer">
    
     <div class="container">
