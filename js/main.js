@@ -29,7 +29,7 @@ var extensiones = archivo.substring(archivo.lastIndexOf("."));
 $.ajax({
                 url: "mupload",
                 type: "post",
-                dataType: "html", 
+                dataType: "html",
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -970,7 +970,7 @@ $('.paginate').bind('click', function(){
 
 
 function actualizar(){
-$('.badge').fadeOut("slow").load('../procesos/alert').fadeIn("slow");
+$('.badge1').fadeOut("slow").load('../procesos/alert').fadeIn("slow");
 }
 setInterval(actualizar, 10000);
 

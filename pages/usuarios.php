@@ -1,4 +1,5 @@
 <?php 
+define("PERPAGE_LIMIT",6);
 require_once '../class/conexion.php';
 require_once("../class/obj_archivo.php");
 session_start();
@@ -9,6 +10,84 @@ header("location:../procesos/logout.php");
 $obj_1=new Tarchivos();
 $ObtenerUsuarios=$obj_1->getuser();
 $ObtenerRestringir=$obj_1->getrestringir();
+
+function getFAQ() {
+$sql = "SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos,a.estado FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id)";
+
+
+// getting parameters required for pagination
+$currentPage = 1;
+if(isset($_GET['pageNumber'])){
+$currentPage = $_GET['pageNumber'];
+}
+$startPage = ($currentPage-1)*PERPAGE_LIMIT;
+if($startPage < 0) $startPage = 0;
+$href = "usuarios?";
+
+//adding limits to select query
+$query =  $sql . " limit " . $startPage . "," . PERPAGE_LIMIT; 
+$result = mysql_query($query,Conectar::con());
+
+while($row=mysql_fetch_array($result)) {
+$questions[] = $row;
+
+}
+
+
+if(is_array($questions)){
+$questions["page_links"] = paginateResults($sql,$href);
+return $questions;
+}
+}
+
+//function creates page links
+function pagination($count, $href) {
+$output = '';
+if(!isset($_REQUEST["pageNumber"])) $_REQUEST["pageNumber"] = 1;
+if(PERPAGE_LIMIT != 0)
+$pages  = ceil($count/PERPAGE_LIMIT);
+
+//if pages exists after loop's lower limit
+if($pages>1) {
+if(($_REQUEST["pageNumber"]-3)>0) {
+$output = $output . '<li><a href="' . $href . 'pageNumber=1" class="page">1</a></li>';
+}
+/*if(($_REQUEST["pageNumber"]-3)>1) {
+$output = $output . '...';
+}*/
+
+//Loop for provides links for 2 pages before and after current page
+for($i=($_REQUEST["pageNumber"]-2); $i<=($_REQUEST["pageNumber"]+2); $i++)  {
+if($i<1) continue;
+if($i>$pages) break;
+if($_REQUEST["pageNumber"] == $i)
+$output = $output . '<li class="active"><a id='.$i.' class="current">'.$i.'</a></li>';
+else        
+$output = $output . '<li><a href="' . $href . "pageNumber=".$i . '" class="page">'.$i.'</a></li>';
+}
+
+//if pages exists after loop's upper limit
+/*if(($pages-($_REQUEST["pageNumber"]+2))>1) {
+$output = $output . '...';
+}*/
+if(($pages-($_REQUEST["pageNumber"]+2))>0) {
+if($_REQUEST["pageNumber"] == $pages)
+$output = $output . '<li class="active"><a id=' . ($pages) .' class="current">' . ($pages) .'</a></li>';
+else        
+$output = $output . '<li><a href="' . $href .  "pageNumber=" .($pages) .'" class="page">' . ($pages) .'</a></li>';
+}
+
+}
+return $output;
+}
+
+//function calculate total records count and trigger pagination function  
+function paginateResults($sql, $href) {
+$result  = mysql_query($sql,Conectar::con());
+$count   = mysql_num_rows($result);
+$page_links = pagination($count, $href);
+return $page_links;
+}
 ?>
 
 
@@ -115,7 +194,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
 
 
 <div class="row">
-    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 <h3>Tabla de Usuarios</h3>
   <table class="table table-bordered">
@@ -126,30 +205,34 @@ $ObtenerRestringir=$obj_1->getrestringir();
              <th>Usuario</th>
              <th>Cargo</th>
              <th>Unidad</th>
-             <th>Departamento</th>  
+             <th>Departamento</th> 
+             <th>Estado</th>  
           </tr>
         </thead>
 <?php
-          for($i = 0; $i < sizeof($ObtenerUsuarios); $i++){
+          $questions = getFAQ();
+if(is_array($questions)) {
+for($i=0;$i<count($questions)-1;$i++) {
             ?>
         <tbody>
         <tr>
         <td><?php echo $i; ?> </td>
-         <td><?php echo $ObtenerUsuarios[$i]["name"]." ". $ObtenerUsuarios[$i]["last_name"]; ?> </td>
-          <td><?php echo $ObtenerUsuarios[$i]["user"];?> </td>
-          <td><?php echo $ObtenerUsuarios[$i]["permisos"];?> </td>
-          <td><?php echo $ObtenerUsuarios[$i]["unidades"];?> </td>
-          <td><?php echo $ObtenerUsuarios[$i]["departamentos"];?> </td>
+         <td><?php echo $questions[$i]["name"]." ". $questions[$i]["last_name"]; ?> </td>
+          <td><?php echo $questions[$i]["user"];?> </td>
+          <td><?php echo $questions[$i]["permisos"];?> </td>
+          <td><?php echo $questions[$i]["unidades"];?> </td>
+          <td><?php echo $questions[$i]["departamentos"];?> </td>
+          <td><?php if($questions[$i]["estado"]==1){echo '<div class="online" data-toggle="tooltip" data-placement="top" title="En Linea"></div>';}else{echo '<div class="offline" data-toggle="tooltip" data-placement="top" title="Fuera de Linea"></div>';}?> </td>
           <td><div class="btn-group">
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Acción <span class="caret"></span>
   </button>
   <ul class="dropdown-menu app-dropdown-menu">
   <?php if($ObtenerRestringir[$p]['editar']==1){?>
-    <li data="<?php echo $ObtenerUsuarios[$i]['id']; ?>"><a href="#" class="editU">Editar</a></li>
+    <li data="<?php echo $questions[$i]['id']; ?>"><a href="#" class="editU">Editar</a></li>
     <?php } ?>
     <?php if($ObtenerRestringir[$p]['eliminar']==1){?>
-    <li data="<?php echo $ObtenerUsuarios[$i]['id']; ?>"><a href="#" class="trashU">Eliminar</a></li>
+    <li data="<?php echo $questions[$i]['id']; ?>"><a href="#" class="trashU">Eliminar</a></li>
     <?php } ?>
   </ul>
 </div></td>
@@ -157,6 +240,19 @@ $ObtenerRestringir=$obj_1->getrestringir();
         </tbody>
         <?php } ?>
       </table>
+
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+        <?php echo $questions["page_links"]; ?>
+   
+   
+  </ul>
+</nav>
+
+<?php
+}
+?>
 </div>
 </div>
 </div>

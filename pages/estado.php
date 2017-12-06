@@ -51,7 +51,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
             <span class="icon-bar app-bar"></span>
             <span class="icon-bar app-bar"></span>
           </button>
-           <h1 class="app-h1">Dirección Nacional de Telemática</h1>
+           <h1 class="app-h1">Dirección Policial de Telemática</h1>
           
           </div>
           <div class="collapse navbar-collapse" id="menu">
@@ -122,6 +122,59 @@ $ObtenerRestringir=$obj_1->getrestringir();
 </div>
 <?php } ?>
 </div>
+
+<h3>Documentos por Dirección y Departamentos</h3>
+<?php 
+$conteo="SELECT MAX(id) as TotalUnidades FROM unidades";
+$totalConteo=mysql_query($conteo,Conectar::con());
+$count=mysql_fetch_array($totalConteo);
+
+for($i=0; $i<=$count['TotalUnidades'];$i++){
+$sql1="SELECT c.id,c.nombre,count(a.propietario) as TotalDireccion FROM archivos as a inner join departamentos as b on (a.propietario=b.id) inner join unidades as c on (b.idunidades=c.id) where c.id=$i group by c.id";
+$sql2="SELECT b.idunidades,b.nombre,count(a.propietario) as Cantidad FROM archivos as a inner join departamentos as b on (a.propietario=b.id)  group by a.propietario order by Cantidad desc";
+
+$con1=mysql_query($sql1,Conectar::con());
+$con2=mysql_query($sql2,Conectar::con());
+echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
+while($row1=mysql_fetch_array($con1)){
+  echo '<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading'.$row1['id'].'">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#'.$row1['id'].'" aria-expanded="true" aria-controls="'.$row1['id'].'">';
+  echo $row1['nombre'].' '.'<div class="app-total">Total:'.' '.'<span class="badge app-badge">'.$row1['TotalDireccion'].'</span></div>';
+
+echo '</a>
+      </h4>
+    </div>';
+    echo '<div id="'.$row1['id'].'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading'.$row1['id'].'">
+      <div class="panel-body">';
+
+while($row2=mysql_fetch_array($con2)){
+
+if($row2['idunidades']==$row1['id']){
+echo '<ul class="list-group">
+  <li class="list-group-item">
+    <span class="badge">'.$row2['Cantidad'].'</span>'
+    .$row2['nombre'].
+  '</li>
+</ul>';
+
+
+}/*cierre if donde lista las unidades de cada direccion*/
+
+}/*cierre del while de listado de las unidades*/
+echo '</div>
+    </div> </div>';
+
+}/*cierre while cabecera de la direccion*/
+echo '</div>';
+}/*cierre ciclo for para el indice de cabecera de cada seccion*/
+
+
+
+?>
+
+
         </div> <!-- /container -->   
     <div id="modalDialog">
       

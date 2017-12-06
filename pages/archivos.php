@@ -2,11 +2,13 @@
 require_once '../class/conexion.php';
 require_once("../class/obj_archivo.php");
 session_start();
-
+$_SESSION['estado'];
 if($_SESSION['user']=="")
 {
 header("location:../procesos/logout");
 } 
+
+
 $obj_1=new Tarchivos();
 $Obtenerenviados=$obj_1->getenviados();
 $Obtenernoti=$obj_1->getnoti();
@@ -99,7 +101,7 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
         <h3 class="app-head">DOCUMENTOS INGRESADOS AL SISTEMA</h3>
         <section id="notificaciones">
         
-   <a class="app-notificaciones" href="">No Leídos <span class="badge"></span></a>
+   <a class="app-notificaciones" href="">No Leídos <span class="badge badge1"></span></a>
    
 </section>
         <section id="busqueda">

@@ -17,6 +17,7 @@ private $SinArchivo;
 
 
 
+
 public function __construct(){
 	$this->verenviados=array();
 	$this->verrecibidos=array();
@@ -30,6 +31,7 @@ public function __construct(){
 	$this->detalle=array();
 	$this->respuesta=array();
 	$this->SinArchivo=array();
+	
 }
 
 
@@ -113,7 +115,7 @@ while($reg = mysql_fetch_assoc($res)){
 
 public function getuser(){
 		
-	$sql="SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id)";
+	$sql="SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos,a.estado FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id)";
 $res=mysql_query($sql,Conectar::con());
 while($reg = mysql_fetch_assoc($res)){
 				$this->user[] = $reg;
