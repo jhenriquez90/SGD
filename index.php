@@ -30,6 +30,8 @@ $_SESSION['user'] = "";
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -68,7 +70,7 @@ $_SESSION['user'] = "";
   
     <label for="user" class="col-sm-2 col-lg-2 control-label">Usuario</label>
     <div class="col-xs-12 col-sm-4 col-md-6 col-lg-6">
-      <input type="text" class="form-control" id="user" name="user" placeholder="Usuario">
+      <input type="text" class="form-control" id="user" name="user" placeholder="Usuario" autofocus>
     </div>
   </div>
 
