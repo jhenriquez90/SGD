@@ -1,4 +1,5 @@
 ﻿<?php
+date_default_timezone_set('America/Tegucigalpa');
 class Conectar
 	{
 		public static function con()

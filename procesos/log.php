@@ -3,7 +3,7 @@ require_once '../class/conexion.php';
 
 $user=$_POST['usuario'];
 $pasw=md5($_POST['pasw']);
-$sql1="UPDATE login set estado=1, fechainout=NOW() where user='$user' and password='$pasw' ";
+$sql1="UPDATE login set estado=1, fechain=NOW() where user='$user' and password='$pasw' ";
 $query1=mysql_query($sql1,Conectar::con());
 
 $sql="select a.id,a.name,a.last_name,a.user,a.password,a.permisos,a.unidad,a.departamento,b.nombre as nameb,c.nombre as namec,a.estado from login as a inner join unidades as b on a.unidad=b.id inner join departamentos as c on a.departamento=c.id where user='$user' and password='$pasw'";

@@ -8,11 +8,11 @@ if($_SESSION['user']=="")
 header("location:../procesos/logout.php");
 } 
 $obj_1=new Tarchivos();
-$ObtenerUsuarios=$obj_1->getuser();
+
 $ObtenerRestringir=$obj_1->getrestringir();
 
 function getFAQ() {
-$sql = "SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos,a.estado FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id)";
+$sql = "SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos,a.estado,a.fechain,a.fechaout,datediff((NOW()),(fechaout))as DiasUltimaConexion, timediff((NOW()),(fechaout))as TiempoUltimaConexion,datediff((NOW()),(fechain))as DiasdeConexion,timediff((NOW()),(fechain))as TiempodeConexion FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id) order by a.estado desc";
 
 
 // getting parameters required for pagination
@@ -205,15 +205,16 @@ return $page_links;
              <th>Usuario</th>
              <th>Cargo</th>
              <th>Unidad</th>
-             <th>Departamento</th> 
+             <th>Departamento</th>
+             <th>Tiempo de Nueva Conexión</th>
+             <th>Ultimo Cierre de Sesión</th>  
              <th>Estado</th>  
           </tr>
         </thead>
-<?php
-          $questions = getFAQ();
+<?php $questions = getFAQ();
 if(is_array($questions)) {
 for($i=0;$i<count($questions)-1;$i++) {
-            ?>
+           ?>
         <tbody>
         <tr>
         <td><?php echo $i; ?> </td>
@@ -222,6 +223,32 @@ for($i=0;$i<count($questions)-1;$i++) {
           <td><?php echo $questions[$i]["permisos"];?> </td>
           <td><?php echo $questions[$i]["unidades"];?> </td>
           <td><?php echo $questions[$i]["departamentos"];?> </td>
+          <td><?php  if($questions[$i]["DiasdeConexion"]==""){
+                          echo '0 días';}
+                          elseif($questions[$i]["TiempodeConexion"]<24){
+                            echo $questions[$i]["TiempodeConexion"].' Horas';
+                          }
+                          elseif($questions[$i]["DiasdeConexion"]==1){
+                            echo $questions[$i]["DiasdeConexion"].' '.'día';
+                          }
+                          elseif($questions[$i]["DiasdeConexion"]>1){
+                            echo $questions[$i]["DiasdeConexion"].' '.'días';
+                          }
+                          ?>
+         </td>
+          <td><?php  if($questions[$i]["DiasUltimaConexion"]==""){
+                          echo '0 días';}
+                          elseif($questions[$i]["TiempoUltimaConexion"]<24){
+                            echo $questions[$i]["TiempoUltimaConexion"].' Horas';
+                          }
+                          elseif($questions[$i]["DiasUltimaConexion"]==1){
+                            echo $questions[$i]["DiasUltimaConexion"].' '.'día';
+                          }
+                          elseif($questions[$i]["DiasUltimaConexion"]>1){
+                            echo $questions[$i]["DiasUltimaConexion"].' '.'días';
+                          }
+                          ?>
+         </td>
           <td><?php if($questions[$i]["estado"]==1){echo '<div class="online" data-toggle="tooltip" data-placement="top" title="En Linea"></div>';}else{echo '<div class="offline" data-toggle="tooltip" data-placement="top" title="Fuera de Linea"></div>';}?> </td>
           <td><div class="btn-group">
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

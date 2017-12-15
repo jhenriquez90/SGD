@@ -114,7 +114,7 @@ header("location:../procesos/logout");
     <div id="modalDialog">
       
     </div>
-    
+
 <?php } ?>
 <!--Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática -->   
 <footer class="app-footer">

@@ -331,6 +331,16 @@ margin-top: 23px !important;
   margin-top: 20px;
   border:1px #751409 solid;
 }
+
+.app-panel{
+ border-color:#0787c5; 
+}
+
+.app-panel>.panel-heading{
+  color: #ffffff;
+  background-color: #0787c5;
+}
+
 /*Media Queries*/
 
 @media only screen and (max-width: 640px) {

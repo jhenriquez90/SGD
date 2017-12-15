@@ -128,16 +128,16 @@ $ObtenerRestringir=$obj_1->getrestringir();
 $conteo="SELECT MAX(id) as TotalUnidades FROM unidades";
 $totalConteo=mysql_query($conteo,Conectar::con());
 $count=mysql_fetch_array($totalConteo);
-
+echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
 for($i=0; $i<=$count['TotalUnidades'];$i++){
 $sql1="SELECT c.id,c.nombre,count(a.propietario) as TotalDireccion FROM archivos as a inner join departamentos as b on (a.propietario=b.id) inner join unidades as c on (b.idunidades=c.id) where c.id=$i group by c.id";
 $sql2="SELECT b.idunidades,b.nombre,count(a.propietario) as Cantidad FROM archivos as a inner join departamentos as b on (a.propietario=b.id)  group by a.propietario order by Cantidad desc";
 
 $con1=mysql_query($sql1,Conectar::con());
 $con2=mysql_query($sql2,Conectar::con());
-echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
+
 while($row1=mysql_fetch_array($con1)){
-  echo '<div class="panel panel-default">
+  echo '<div class="panel app-panel">
     <div class="panel-heading" role="tab" id="heading'.$row1['id'].'">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#'.$row1['id'].'" aria-expanded="true" aria-controls="'.$row1['id'].'">';
@@ -148,28 +148,26 @@ echo '</a>
     </div>';
     echo '<div id="'.$row1['id'].'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading'.$row1['id'].'">
       <div class="panel-body">';
-
+echo '<ul class="list-group">';
 while($row2=mysql_fetch_array($con2)){
 
 if($row2['idunidades']==$row1['id']){
-echo '<ul class="list-group">
-  <li class="list-group-item">
+echo '<li class="list-group-item">
     <span class="badge">'.$row2['Cantidad'].'</span>'
     .$row2['nombre'].
-  '</li>
-</ul>';
+  '</li>';
 
 
 }/*cierre if donde lista las unidades de cada direccion*/
 
 }/*cierre del while de listado de las unidades*/
-echo '</div>
+echo '</ul></div>
     </div> </div>';
 
 }/*cierre while cabecera de la direccion*/
-echo '</div>';
-}/*cierre ciclo for para el indice de cabecera de cada seccion*/
 
+}/*cierre ciclo for para el indice de cabecera de cada seccion*/
+echo '</div>';
 
 
 ?>

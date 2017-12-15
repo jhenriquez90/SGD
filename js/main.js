@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    
+
   $('#img_destino').attr('src','../img/upload.png').show();
  
    $('#mimg').change(function(){
@@ -950,22 +952,6 @@ location.reload();
 
 
 
-$('.paginate').bind('click', function(){
-    
-    $('#modalDialog').html('<div class="loading"><img src="images/loading.gif" width="70px" height="70px"/></div>');
-
-    var page = $(this).attr('data');    
-    var dataString = 'page='+page;
-    
-    $.ajax({
-            type: "GET",
-            url: "../procesos/pagination.php",
-            data: dataString,
-            success: function(data) {
-        $('#modalDialog').fadeIn(1000).html(data);
-            }
-        });
-    });              
 
 
 
@@ -988,6 +974,7 @@ setInterval(actualizar, 10000);
     });
 }
 setInterval(checkMsj,10000);*/
+
 
 /*Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática */
 function obtenerDialog(Nota,Contenido){
