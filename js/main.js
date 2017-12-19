@@ -702,7 +702,9 @@ type:"POST",
 url:"../procesos/envios",
 data:dataString,
 success:function(env){
-  if(env==1){
+  if(env==21){
+    obtenerDialog('Nota','Este Archivo ya a sido enviado al destinatario');
+  }else if(env==1){
     obtenerDialog('Nota','Su Archivo se envió a los destinatarios correctamente');
      $('#aceptar').on('click',function(){
           location.reload();
