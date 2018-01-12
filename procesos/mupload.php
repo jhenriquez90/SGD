@@ -15,10 +15,10 @@ $nombreImagen=$oficio.'.pdf';
 $rutaDestino=$rutaEnServidor.'/'.$nombreImagen;
 
 if (!file_exists($rutaEnServidor)) {
-    mkdir($rutaEnServidor, 0777, true);
-    move_uploaded_file($rutaTemporal,$rutaDestino);
+    mkdir(utf8_decode($rutaEnServidor), 0777, true);
+    move_uploaded_file($rutaTemporal,utf8_decode($rutaDestino));
 }else{
-move_uploaded_file($rutaTemporal,$rutaDestino);
+move_uploaded_file($rutaTemporal,utf8_decode($rutaDestino));
 }
 
 /*ruta en BD de imagen en carpeta*/
