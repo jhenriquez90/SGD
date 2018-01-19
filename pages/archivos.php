@@ -37,8 +37,9 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
         <link rel="stylesheet" href="../css/main.css">
 
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        
     </head>
-    <body>
+    <body >
     <?php  for ($p=0; $p <sizeof($ObtenerRestringir) ; $p++) { ?>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -48,7 +49,7 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
         <div id="logo">
          
         </div>
-        
+        <?php if($_SESSION['birthday']=="0000-00-00"){ ?><span class="alert alert-info app-position" role="alert"> Debes actualizar tu perfil en la <strong>"Fecha de Nacimiento"</strong> presiona <strong> <a href="perfil">Aqui!</a></strong> </span><?php } ?>
          <nav class="navbar navbar-personalizado">
         <div class="container">
           <div class="navbar-header">
@@ -221,7 +222,6 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
             <th>Usuario de Creación</th>  
             <th>Observación</th>
             <th>Archivo</th>    
-            
             </tr>
         </thead>
         

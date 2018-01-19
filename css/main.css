@@ -340,7 +340,12 @@ margin-top: 23px !important;
   color: #ffffff;
   background-color: #0787c5;
 }
-
+.app-position{
+  position: fixed;
+  z-index: 100 !important;
+  top: 40%;
+  left: 30%;
+}
 /*Media Queries*/
 
 @media only screen and (max-width: 640px) {

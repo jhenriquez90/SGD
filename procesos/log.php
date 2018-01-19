@@ -6,7 +6,7 @@ $pasw=md5($_POST['pasw']);
 $sql1="UPDATE login set estado=1, fechain=NOW() where user='$user' and password='$pasw' ";
 $query1=mysql_query($sql1,Conectar::con());
 
-$sql="select a.id,a.name,a.last_name,a.user,a.password,a.permisos,a.unidad,a.departamento,b.nombre as nameb,c.nombre as namec,a.estado from login as a inner join unidades as b on a.unidad=b.id inner join departamentos as c on a.departamento=c.id where user='$user' and password='$pasw'";
+$sql="select a.id,a.name,a.last_name,a.user,a.password,a.permisos,a.unidad,a.departamento,a.birthday,b.nombre as nameb,c.nombre as namec,a.estado from login as a inner join unidades as b on a.unidad=b.id inner join departamentos as c on a.departamento=c.id where user='$user' and password='$pasw'";
 $query=mysql_query($sql,Conectar::con());
 $result=mysql_num_rows($query);
 
@@ -19,6 +19,7 @@ $_SESSION['id']=$usuarios['id'];
 $_SESSION['user']=$usuarios['user'];
 $_SESSION['nombre']=$usuarios['name'];
 $_SESSION['apellido']=$usuarios['last_name'];
+$_SESSION['birthday']=$usuarios['birthday'];
 $_SESSION['nameb']=$usuarios['nameb'];
 $_SESSION['namec']=$usuarios['namec'];
 $_SESSION['cargo']=$usuarios['permisos'];

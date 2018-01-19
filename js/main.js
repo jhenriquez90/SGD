@@ -592,14 +592,15 @@ var id=$('#id').val();
     var user=$('#user').val();
     var psw=$('#psw').val();
     var confpsw=$('#confpsw').val();
-var dataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw;
-
-
+    var birthday=$('#birthday').val();
+var dataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw+'&birthday='+birthday;
+var DataString= 'id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&birthday='+birthday;
+ 
      if(psw=="" && confpsw==""){
        $.ajax({
       type:"POST",
       url:"../procesos/editmperfil",
-      data:dataString,
+      data:DataString,
       success:function(b){
         if(b==1){
            obtenerDialog('Nota',' Usuario fue editado');
