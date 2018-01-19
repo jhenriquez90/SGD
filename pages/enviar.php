@@ -12,6 +12,7 @@ if($_SESSION['user']=="")
 header("location:../procesos/logout");
 } 
 
+
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -108,7 +109,7 @@ header("location:../procesos/logout");
   
 </div>
 <input type="hidden" name="ids" id="ids" value="<?php echo $id=$_GET['id'];?>">
-<button id="send" name="send" class="btn btn-success">Enviar</button>
+<button id="send" name="send" class="btn btn-success"><span class="glyphicon glyphicon-send"></span> Enviar</button>
      </div> <!-- /container --> 
      </div>  
     <div id="modalDialog">
