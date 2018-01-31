@@ -1,6 +1,6 @@
 <?php
 require_once'../class/conexion.php';
-echo $id=$_POST['id'];
+$id=$_POST['id'];
 $name=$_POST['name'];
 $last_name=$_POST['last_name'];
 $user=$_POST['user'];

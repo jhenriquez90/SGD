@@ -6,7 +6,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
 $CriterioBusqueda=$_POST['CriterioBusqueda'];
 
 if($CriterioBusqueda!=""){
-$sql="SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos,a.estado FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id) where name LIKE '%".$CriterioBusqueda."%'";
+$sql="SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos,a.estado,datediff((NOW()),(fechaout)) as DiasUltimaConexion, timediff((NOW()),(fechaout))as TiempoUltimaConexion,datediff((NOW()),(fechain)) as DiasdeConexion,timediff((NOW()),(fechain)) as TiempodeConexion FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id) where name LIKE '%".$CriterioBusqueda."%' OR last_name LIKE '%".$CriterioBusqueda."%' or user LIKE '%".$CriterioBusqueda."%'";
 $res=mysql_query($sql,Conectar::con());
 $count=mysql_num_rows($res);
 if($count>=1){
@@ -17,7 +17,9 @@ echo ' <table class="table table-bordered">
              <th>Usuario</th>
              <th>Cargo</th>
              <th>Unidad</th>
-             <th>Departamento</th> 
+             <th>Departamento</th>
+             <th>Tiempo de Nueva Conexión</th>
+             <th>Ultimo Cierre de Sesión</th>   
              <th>Estado</th> 
           </tr>
         </thead>';
@@ -30,7 +32,34 @@ echo '<tbody>
           <td>'.$row["permisos"].'</td>
           <td>'.$row["unidades"].'</td>
           <td>'.$row["departamentos"].'</td>
-          <td>';if($row["estado"]==1){echo '<div class="online" data-toggle="tooltip" data-placement="top" title="En Linea"></div>';}else{ echo '<div class="offline" data-toggle="tooltip" data-placement="top" title="Fuera de Linea"></div>';}echo'</td>
+          <td>';if($row["DiasdeConexion"]==""){
+                          echo '0 días';
+                        }
+                          elseif($row["TiempodeConexion"]<24){
+                            echo $row["TiempodeConexion"].' Horas';
+                          }
+                          elseif($row["DiasdeConexion"]==1){
+                            echo $row["DiasdeConexion"].' '.'día';
+                          }
+                          elseif($row["DiasdeConexion"]>1){
+                            echo $row["DiasdeConexion"].' '.'días';
+                          }
+                         
+         echo '</td>
+          <td>'; if($row["DiasUltimaConexion"]==""){
+                          echo '0 días';}
+                          elseif($row["TiempoUltimaConexion"]<24){
+                            echo $row["TiempoUltimaConexion"].' Horas';
+                          }
+                          elseif($row["DiasUltimaConexion"]==1){
+                            echo $row["DiasUltimaConexion"].' '.'día';
+                          }
+                          elseif($row["DiasUltimaConexion"]>1){
+                            echo $row["DiasUltimaConexion"].' '.'días';
+                          }
+                          
+         echo '</td>
+          <td>';if($row["estado"]==1){echo '<div class="online" data-toggle="tooltip" data-placement="top" title="En Linea"></div>';}else{ echo '<div class="offline" data-toggle="tooltip" data-placement="top" title="Fuera de Linea"></div>';}echo '</td>
           <td><div class="btn-group">
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Acción <span class="caret"></span>

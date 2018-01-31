@@ -112,7 +112,7 @@ $totalConteo=mysql_query($conteo,Conectar::con());
 $count=mysql_fetch_array($totalConteo);
 echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
 for($i=0; $i<=$count['TotalUnidades'];$i++){
-$sql1="SELECT c.id,c.nombre FROM archivos as a inner join departamentos as b on (a.propietario=b.id) inner join unidades as c on (b.idunidades=c.id) where c.id=$i group by c.id order by c.id";
+$sql1="SELECT b.id,b.nombre FROM departamentos as a inner join unidades as b on (a.idunidades=b.id) where b.id=$i group by b.id order by b.id";
 $sql2="SELECT idunidades,nombre FROM departamentos";
 
 $con1=mysql_query($sql1,Conectar::con());
