@@ -49,7 +49,7 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
         <div id="logo">
          
         </div>
-        <?php if($_SESSION['birthday']=="0000-00-00"){ ?><span class="alert alert-info app-position" role="alert"> Debes actualizar tu perfil en la <strong>"Fecha de Nacimiento"</strong> presiona <strong> <a href="perfil">Aqui!</a></strong> </span><?php } ?>
+        <?php if($_SESSION['birthday']=="0000-00-00"){  ?><span class="alert alert-info app-position" role="alert"> Debes actualizar tu perfil en la <strong>"Fecha de Nacimiento"</strong> presiona <strong> <a href="perfil">Aqui!</a></strong> </span><?php } ?>
          <nav class="navbar navbar-personalizado">
         <div class="container">
           <div class="navbar-header">
@@ -284,15 +284,12 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
         <thead>
         <tr>
             <th>Id</th>
-            <th>Origen del Documento</th>
             <th>Destinatario del Documento</th>
             <th>Nombre del Documento</th>
-            <th>Número de Oficio</th>
-            <th>Receptor</th>
+            <th>Número de Oficio</th>            
             <th>Estado</th>
             <th>Observación</th>
-            <th>Fecha que se Envió el documento</th>
-            <th>Fecha que Recibió el documento</th>
+            <th>Fecha de Envió</th>            
             <th>Respuestas</th>
             <th>Archivo</th>
             </tr>
@@ -304,15 +301,12 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
 
 <tr>
     <td><?php echo $i; ?></td>
-    <td><?php echo $Obtenerenviados[$i]['origen']; ?></td>
     <td><?php echo $Obtenerenviados[$i]['destino']; ?></td>
     <td><?php echo $Obtenerenviados[$i]['name_docto']; ?></td>
-     <td><?php echo $Obtenerenviados[$i]['oficio']; ?></td>
-          <td><?php echo $Obtenerenviados[$i]['usuario']; ?></td>
+     <td><?php echo $Obtenerenviados[$i]['oficio']; ?></td>          
           <td><?php echo $Obtenerenviados[$i]['estado']; ?></td>
            <td><?php echo $Obtenerenviados[$i]['obs']; ?></td>
-            <td><?php echo $fecha=date("d/m/Y h:i:s",strtotime($Obtenerenviados[$i]['henviado']));  ?></td>
-            <td><?php echo $fecha=date("d/m/Y h:i:s",strtotime($Obtenerenviados[$i]['hleido']));  ?></td>
+            <td><?php echo $fecha=date("d/m/Y h:i:s",strtotime($Obtenerenviados[$i]['henviado']));  ?></td>            
             <td data="<?php echo $Obtenerenviados[$i]['id_docto']; ?>"><span class="ver glyphicon glyphicon-eye-open"></span></td>
             <td><a target="_blank" href="<?php echo $Obtenerenviados[$i]['url']?>"><img class="app-pdfimg" src="../img/pdf.png"></a></td>
             <td><div class="btn-group">
@@ -353,7 +347,6 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
         <tr>
             <th>Id</th>
             <th>Origen del Documento</th>
-            <th>Destinatario del Documento</th>
             <th>Nombre del Documento</th>
             <th>Número de Oficio</th>
             <th>Observación</th>
@@ -370,7 +363,6 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
 <tr bgcolor="<?php if($colores==1) {echo '';}elseif($colores==2){ echo '#991a1a';}else{ echo '#166fa3';} ?>">
     <td><?php echo $i; ?></td>
     <td><?php echo $Obtenerrecibidos[$i]['origen']; ?></td>
-    <td><?php echo $Obtenerrecibidos[$i]['destino']; ?></td>
     <td><?php echo $Obtenerrecibidos[$i]['name_docto']; ?></td>
      <td><?php echo $Obtenerrecibidos[$i]['oficio']; ?></td>
             <td><?php echo $Obtenerrecibidos[$i]['obs']; ?></td>

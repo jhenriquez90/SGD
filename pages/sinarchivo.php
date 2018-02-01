@@ -260,7 +260,9 @@ for($i=0;$i<count($questions)-1;$i++) {
 <?php
 }
 ?>
-
+<div id="modalDialog">
+      
+    </div>
 <footer class="app-footer">
    
     <div class="container">
