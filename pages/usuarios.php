@@ -263,6 +263,8 @@ for($i=0;$i<count($questions)-1;$i++) {
     <?php if($ObtenerRestringir[$p]['eliminar']==1){?>
     <li data="<?php echo $questions[$i]['id']; ?>"><a href="#" class="trashU">Eliminar</a></li>
     <?php } ?>
+    <li role="separator" class="divider"></li>
+    <li data="<?php echo $questions[$i]['id']; ?>"><a href="#" class="logoutad">Cerrar Sesión</a></li>
   </ul>
 </div></td>
           </tr>

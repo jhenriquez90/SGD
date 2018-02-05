@@ -954,7 +954,30 @@ location.reload();
 });
 
 
+$('.logoutad').on('click',function(){
+var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>');  
+var id=$(this).parent().attr('data');
+var DataString='id='+id;
+$.ajax({
+type:"POST",
+url:"../procesos/logoutad",
+data: DataString,
+success:function(resp){
+if(resp==1){
+obtenerDialog('Sesion','El cambio de estado de la Sesion a sido realizada con Exito');
+$('#aceptar').on('click',function(){
+location.reload();
+  });
+}else{
+obtenerDialog('Sesion','El cambio de estado de la Sesion no se pudo realizar');
 
+}
+
+}
+
+
+});
+});
 
 
 
