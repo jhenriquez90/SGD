@@ -51,7 +51,7 @@ $ObtenerUnidades=$obj_1->getUnidades();
             <span class="icon-bar app-bar"></span>
             <span class="icon-bar app-bar"></span>
           </button>
-           <h1 class="app-h1">Dirección Nacional de Telemática</h1>
+             <h1 class="app-h1"><?php echo $_SESSION['nameb']; ?> <br> <?php echo $_SESSION['namec'];?></h1>
           
           </div>
           <div class="collapse navbar-collapse" id="menu">
@@ -113,7 +113,7 @@ $count=mysql_fetch_array($totalConteo);
 echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
 for($i=0; $i<=$count['TotalUnidades'];$i++){
 $sql1="SELECT b.id,b.nombre FROM departamentos as a inner join unidades as b on (a.idunidades=b.id) where b.id=$i group by b.id order by b.id";
-$sql2="SELECT idunidades,nombre FROM departamentos";
+$sql2="SELECT idunidades,nombre FROM departamentos order by nombre";
 
 $con1=mysql_query($sql1,Conectar::con());
 $con2=mysql_query($sql2,Conectar::con());

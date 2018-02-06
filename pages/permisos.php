@@ -18,7 +18,9 @@ $ObtenerRestringir=$obj_1->getrestringir();
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Gestión y Control de Documentos</title>
+        <link rel="shortcut icon" href="../img/logo.png" />
+        <link rel="shortcut icon" href="../img/logo.png" type="image/png" />
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -46,7 +48,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
             <span class="icon-bar app-bar"></span>
             <span class="icon-bar app-bar"></span>
           </button>
-          <img id="logo" src="" >
+            <h1 class="app-h1"><?php echo $_SESSION['nameb']; ?> <br> <?php echo $_SESSION['namec'];?></h1>
           
           </div>
           <div class="collapse navbar-collapse" id="menu">

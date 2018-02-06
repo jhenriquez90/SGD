@@ -5,7 +5,7 @@ session_start();
 
 $permisos="select id,ncargo from permisos";
 $cpermisos=mysql_query($permisos,Conectar::con());
-$unidades="select id,nombre from unidades";
+$unidades="select id,nombre from unidades order by nombre";
 $cunidades=mysql_query($unidades,Conectar::con());
 
 
