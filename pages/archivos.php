@@ -110,7 +110,7 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
          <label>Búsqueda</label>             
              <div class="input-group">
-             <input data-toggle="tooltip" data-placement="bottom" title="Búsqueda por Nombre del Documento,Número de Oficio, Origen del documento"  class="form-control" type="text" id="search" name="search" placeholder="Búsqueda...">
+             <input data-toggle="tooltip" data-placement="bottom" title="Búsqueda por Nombre del Documento,Número de Oficio, Origen del documento"  class="form-control" type="text" id="search" name="search" placeholder="Búsqueda..." onkeyup="this.value=NumText(this.value)">
             <div id="btnsearch" class="btn input-group-addon btnsearch" for="search">Buscar</div>
             </div> 
 
@@ -404,7 +404,18 @@ $ObtenerSinArchivo=$obj_1->getSinArchivo();
         <br>Derechos Reservados 2017
     </div>
 </footer>
-         
+         <script type="text/javascript">
+           function NumText(string){//solo letras y numeros
+    var out = '';
+    //Se añaden las letras validas
+    var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-#';//Caracteres validos
+  
+    for (var i=0; i<string.length; i++)
+       if (filtro.indexOf(string.charAt(i)) != -1) 
+       out += string.charAt(i);
+    return out;
+}
+         </script>
         <script src="../js/vendor/jquery-1.11.2.min.js"></script>
 
         <script src="../js/vendor/bootstrap.min.js"></script>

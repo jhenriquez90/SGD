@@ -177,7 +177,7 @@ return $page_links;
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
          <label>Búsqueda</label>             
              <div class="input-group">
-             <input data-toggle="tooltip" data-placement="bottom" title="Búsqueda por Nombre"  class="form-control" type="text" id="search" name="search" placeholder="Búsqueda...">
+             <input data-toggle="tooltip" data-placement="bottom" title="Búsqueda por Nombre"  class="form-control" type="text" id="search" name="search" placeholder="Búsqueda..." onkeyup="this.value=NumText(this.value)"">
             <div id="SearchUser" class="btn input-group-addon SearchUser" for="search">Buscar</div>
             </div> 
             </div>
@@ -290,6 +290,18 @@ for($i=0;$i<count($questions)-1;$i++) {
 <div id="modalDialog"></div>
 </section>
 <?php } ?>
+<script type="text/javascript">
+           function NumText(string){//solo letras y numeros
+    var out = '';
+    //Se añaden las letras validas
+    var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890';//Caracteres validos
+  
+    for (var i=0; i<string.length; i++)
+       if (filtro.indexOf(string.charAt(i)) != -1) 
+       out += string.charAt(i);
+    return out;
+}
+         </script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
