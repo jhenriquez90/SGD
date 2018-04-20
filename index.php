@@ -1,6 +1,4 @@
 <?php
-require_once 'class/conexion.php';
-
 session_start();
 if (isset($_SESSION['user'])) {
 header("location:procesos/logout");
