@@ -29,7 +29,7 @@ $ObtenerUnidades=$obj_1->getUnidades();
         <link rel="stylesheet" href="../css/bootstrap.min.css">
                 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/main.css">
-
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
@@ -51,7 +51,7 @@ $ObtenerUnidades=$obj_1->getUnidades();
             <span class="icon-bar app-bar"></span>
             <span class="icon-bar app-bar"></span>
           </button>
-           <h1 class="app-h1">Dirección Nacional de Telemática</h1>
+             <h1 class="app-h1"><?php echo $_SESSION['nameb']; ?> <br> <?php echo $_SESSION['namec'];?></h1>
           
           </div>
           <div class="collapse navbar-collapse" id="menu">
@@ -60,6 +60,7 @@ $ObtenerUnidades=$obj_1->getUnidades();
                  
                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href=""> <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['nombre']."&nbsp".$_SESSION['apellido']; ?> <span class="caret Qs"></span></a>
               <ul class="dropdown-menu navbar-dropdown">
+                <li><a href="perfil">Mi Perfil</a></li>
               <li><a href="archivos">Archivos</a></li>
               <?php if($ObtenerRestringir[$p]['usuarios']==1){?>
                <li><a href="usuarios">Usuarios</a></li>
@@ -104,23 +105,57 @@ $ObtenerUnidades=$obj_1->getUnidades();
 
        </div>
 
-        <!--<div class="form-group">
-        <label for="unidades">Unidades</label>
-        <select id="unidades" name="unidades" class="form-control">
-          <option value="" disabled selected >---</option>
-          <?php for($i=0;$i<sizeof($ObtenerUnidades);$i++) {?>
-          <option value="<?php echo $ObtenerUnidades[$i]['id'] ?>"><?php echo $ObtenerUnidades[$i]['nombre'] ?></option>
+      <h3>Documentos por Dirección y Departamentos</h3>
+<?php 
+$conteo="SELECT MAX(id) as TotalUnidades FROM unidades";
+$totalConteo=mysql_query($conteo,Conectar::con());
+$count=mysql_fetch_array($totalConteo);
+echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
+for($i=0; $i<=$count['TotalUnidades'];$i++){
+$sql1="SELECT b.id,b.nombre FROM departamentos as a inner join unidades as b on (a.idunidades=b.id) where b.id=$i group by b.id order by b.id";
+$sql2="SELECT idunidades,nombre FROM departamentos order by nombre";
+
+$con1=mysql_query($sql1,Conectar::con());
+$con2=mysql_query($sql2,Conectar::con());
+?>
+
+<?php while($row1=mysql_fetch_array($con1)){ ?>
+<div class="panel app-panel">
+    <div class="panel-heading" role="tab" id="heading<?php echo $row1['id'];?>">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $row1['id'];?>" aria-expanded="true" aria-controls="<?php echo $row1['id'];?>">
+ <?php echo $row1['nombre']; ?>
+
+</a>
+      </h4>
+    </div>
+    <div id="<?php echo $row1['id'];?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo $row1['id'];?>">
+      <div class="panel-body">
+<ul class="list-group">
+<?php while($row2=mysql_fetch_array($con2)){ ?>
+
+<?php if($row2['idunidades']==$row1['id']){ ?>
+
+  <li class="list-group-item">   
+    <?php echo $row2['nombre']; ?>
+  </li>
 
 
-          <?php } ?>
-           </select>
-<div id="deptos" class="form-group">
-<label for="departamentos">Departamentos</label>
-  
+
+<?php } /*cierre if donde lista las unidades de cada direccion*/ ?>
+
+<?php }/*cierre del while de listado de las unidades*/ ?>
+</ul>
+</div>
+    </div> </div>
+
+<?php }/*cierre while cabecera de la direccion*/?>
+
+<?php }/*cierre ciclo for para el indice de cabecera de cada seccion*/?>
+
 </div>
 
-       
-       </div>-->
+
         </div> <!-- /container -->   
     <div id="modalDialog">
       

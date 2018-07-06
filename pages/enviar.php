@@ -12,6 +12,7 @@ if($_SESSION['user']=="")
 header("location:../procesos/logout");
 } 
 
+
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -31,7 +32,7 @@ header("location:../procesos/logout");
         <link rel="stylesheet" href="../css/bootstrap.min.css">
                 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/main.css">
-
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
@@ -52,7 +53,7 @@ header("location:../procesos/logout");
             <span class="icon-bar app-bar"></span>
             <span class="icon-bar app-bar"></span>
           </button>
-           <h1 class="app-h1">Dirección Nacional de Telemática</h1>
+             <h1 class="app-h1"><?php echo $_SESSION['nameb']; ?> <br> <?php echo $_SESSION['namec'];?></h1>
           
           </div>
           <div class="collapse navbar-collapse" id="menu">
@@ -61,6 +62,7 @@ header("location:../procesos/logout");
                  <li class="dropdown"><a id="Qs" class="app-navbar"  href="archivos">Archivos</a></li>
                  <li class="dropdown"><a id="Qs" class="dropdown-toggle" data-toggle="dropdown" href=""> <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['nombre']."&nbsp".$_SESSION['apellido']; ?> <span class="caret Qs"></span></a>
               <ul class="dropdown-menu navbar-dropdown">
+                <li><a href="perfil">Mi Perfil</a></li>
               <li><a href="archivos">Archivos</a></li>
               <?php if($ObtenerRestringir[$p]['usuarios']==1){?>
                <li><a href="usuarios">usuarios</a></li>
@@ -107,13 +109,13 @@ header("location:../procesos/logout");
   
 </div>
 <input type="hidden" name="ids" id="ids" value="<?php echo $id=$_GET['id'];?>">
-<button id="send" name="send" class="btn btn-success">Enviar</button>
+<button id="send" name="send" class="btn btn-success"><span class="glyphicon glyphicon-send"></span> Enviar</button>
      </div> <!-- /container --> 
      </div>  
     <div id="modalDialog">
       
     </div>
-    
+
 <?php } ?>
 <!--Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática -->   
 <footer class="app-footer">

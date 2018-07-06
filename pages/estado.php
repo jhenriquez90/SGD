@@ -29,7 +29,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <link rel="stylesheet" href="../css/bootstrap.min.css">
                 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/main.css">
-
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
@@ -51,7 +51,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
             <span class="icon-bar app-bar"></span>
             <span class="icon-bar app-bar"></span>
           </button>
-           <h1 class="app-h1">Dirección Nacional de Telemática</h1>
+             <h1 class="app-h1"><?php echo $_SESSION['nameb']; ?> <br> <?php echo $_SESSION['namec'];?></h1>
           
           </div>
           <div class="collapse navbar-collapse" id="menu">
@@ -60,6 +60,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
                  
                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href=""> <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['nombre']."&nbsp".$_SESSION['apellido']; ?> <span class="caret Qs"></span></a>
               <ul class="dropdown-menu navbar-dropdown">
+                <li><a href="perfil">Mi Perfil</a></li>
               <li><a href="archivos">Archivos</a></li>
               <?php if($ObtenerRestringir[$p]['usuarios']==1){?>
                <li><a href="usuarios">Usuarios</a></li>
@@ -121,6 +122,57 @@ $ObtenerRestringir=$obj_1->getrestringir();
 </div>
 <?php } ?>
 </div>
+
+<h3>Documentos por Dirección y Departamentos</h3>
+<?php 
+$conteo="SELECT MAX(id) as TotalUnidades FROM unidades";
+$totalConteo=mysql_query($conteo,Conectar::con());
+$count=mysql_fetch_array($totalConteo);
+echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
+for($i=0; $i<=$count['TotalUnidades'];$i++){
+$sql1="SELECT c.id,c.nombre,count(a.propietario) as TotalDireccion FROM archivos as a inner join departamentos as b on (a.propietario=b.id) inner join unidades as c on (b.idunidades=c.id) where c.id=$i group by c.id";
+$sql2="SELECT b.idunidades,b.nombre,count(a.propietario) as Cantidad FROM archivos as a inner join departamentos as b on (a.propietario=b.id)  group by a.propietario order by Cantidad desc";
+
+$con1=mysql_query($sql1,Conectar::con());
+$con2=mysql_query($sql2,Conectar::con());
+
+while($row1=mysql_fetch_array($con1)){
+  echo '<div class="panel app-panel">
+    <div class="panel-heading" role="tab" id="heading'.$row1['id'].'">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#'.$row1['id'].'" aria-expanded="true" aria-controls="'.$row1['id'].'">';
+  echo $row1['nombre'].' '.'<div class="app-total">Total:'.' '.'<span class="badge app-badge">'.$row1['TotalDireccion'].'</span></div>';
+
+echo '</a>
+      </h4>
+    </div>';
+    echo '<div id="'.$row1['id'].'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading'.$row1['id'].'">
+      <div class="panel-body">';
+echo '<ul class="list-group">';
+while($row2=mysql_fetch_array($con2)){
+
+if($row2['idunidades']==$row1['id']){
+echo '<li class="list-group-item">
+    <span class="badge">'.$row2['Cantidad'].'</span>'
+    .$row2['nombre'].
+  '</li>';
+
+
+}/*cierre if donde lista las unidades de cada direccion*/
+
+}/*cierre del while de listado de las unidades*/
+echo '</ul></div>
+    </div> </div>';
+
+}/*cierre while cabecera de la direccion*/
+
+}/*cierre ciclo for para el indice de cabecera de cada seccion*/
+echo '</div>';
+
+
+?>
+
+
         </div> <!-- /container -->   
     <div id="modalDialog">
       

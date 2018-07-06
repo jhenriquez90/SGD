@@ -13,9 +13,9 @@ $propietario=$_SESSION['departamento'];
 
 if($CriterioBusqueda!="" and $option1=='option1'){
   if($fecha1!=""){
-	$sql="select id_docto,name_docto,oficio,asignado,fecha,num_archive,num_gabeta,num_fila,concat(repository,archive) as url,obs from archivos where propietario='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%' and fecha BETWEEN '".$fecha1."' AND '".$fecha2."') ";
+	$sql="select id_docto,name_docto,oficio,asignado,fecha,num_archive,num_gabeta,num_fila,concat(repository,archive) as url,obs from archivos where propietario='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%' OR obs LIKE '%".$CriterioBusqueda."%'  and fecha BETWEEN '".$fecha1."' AND '".$fecha2."') ";
 }else{
-$sql="select id_docto,name_docto,oficio,asignado,fecha,num_archive,num_gabeta,num_fila,concat(repository,archive) as url,obs from archivos where propietario='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%') ";
+$sql="select id_docto,name_docto,oficio,asignado,fecha,num_archive,num_gabeta,num_fila,concat(repository,archive) as url,obs from archivos where propietario='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%' OR obs LIKE '%".$CriterioBusqueda."%') ";
 
 }
   $res=mysql_query($sql,Conectar::con());
@@ -60,7 +60,7 @@ echo '<tr bgcolor="#efe44c">';
   </button>
   <ul class="dropdown-menu app-dropdown-menu">';
   if($reg['url']!=""){
-    '<li><a href="enviar?id='.$reg['id_docto'].'" class="">Enviar</a></li>';
+    echo '<li><a href="enviar?id='.$reg['id_docto'].'" class="">Enviar</a></li>';
   }else{echo '<li><a class="label label-danger">Falta Archivo</a></li>'; }
     if($ObtenerRestringir[$p]['editar']==1){
    echo '<li data="'.$reg['id_docto'].'"><a href="#" class="edit2">Editar</a></li>';
@@ -83,9 +83,9 @@ echo '<tr bgcolor="#efe44c">';
 }/*final if principal*/
 elseif($CriterioBusqueda!="" and $option1=='option2'){
   if($fecha1!="" and $fecha2!=""){
-$sql="SELECT b.id_mov,a.id_docto,c.nombre as origen,d.nombre as destino,a.name_docto,a.oficio,concat(a.repository,a.archive) as url,b.henviado,b.hleido,b.usuario,a.asignado,e.estado,a.obs FROM archivos as a inner join movimientos as b on (a.id_docto=b.id_docto) left join departamentos as c on(b.origen=c.id) inner join departamentos as d on (b.destino=d.id) inner join estados as e on (e.id_estado=b.estado) where origen='".$propietario."' and (a.oficio LIKE '%".$CriterioBusqueda."%' OR a.name_docto LIKE '%".$CriterioBusqueda."%' OR d.nombre LIKE '%".$CriterioBusqueda."%' and (CAST(b.henviado as DATE) BETWEEN '".$fecha1."' AND '".$fecha2."') ) group by id_docto  ";
+$sql="SELECT b.id_mov,a.id_docto,c.nombre as origen,d.nombre as destino,a.name_docto,a.oficio,concat(a.repository,a.archive) as url,b.henviado,b.hleido,b.usuario,a.asignado,e.estado,a.obs FROM archivos as a inner join movimientos as b on (a.id_docto=b.id_docto) left join departamentos as c on(b.origen=c.id) inner join departamentos as d on (b.destino=d.id) inner join estados as e on (e.id_estado=b.estado) where origen='".$propietario."' and (a.oficio LIKE '%".$CriterioBusqueda."%' OR a.name_docto LIKE '%".$CriterioBusqueda."%' OR d.nombre LIKE '%".$CriterioBusqueda."%' OR a.obs LIKE '%".$CriterioBusqueda."%' and (CAST(b.henviado as DATE) BETWEEN '".$fecha1."' AND '".$fecha2."') ) group by id_docto  ";
 }else{
-  $sql="SELECT b.id_mov,a.id_docto,c.nombre as origen,d.nombre as destino,a.name_docto,a.oficio,concat(a.repository,a.archive) as url,b.henviado,b.hleido,b.usuario,a.asignado,e.estado,a.obs FROM archivos as a inner join movimientos as b on (a.id_docto=b.id_docto) left join departamentos as c on(b.origen=c.id) inner join departamentos as d on (b.destino=d.id) inner join estados as e on (e.id_estado=b.estado) where origen='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%' OR d.nombre LIKE '%".$CriterioBusqueda."%') group by id_docto  ";
+  $sql="SELECT b.id_mov,a.id_docto,c.nombre as origen,d.nombre as destino,a.name_docto,a.oficio,concat(a.repository,a.archive) as url,b.henviado,b.hleido,b.usuario,a.asignado,e.estado,a.obs FROM archivos as a inner join movimientos as b on (a.id_docto=b.id_docto) left join departamentos as c on(b.origen=c.id) inner join departamentos as d on (b.destino=d.id) inner join estados as e on (e.id_estado=b.estado) where origen='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%' OR d.nombre LIKE '%".$CriterioBusqueda."%') OR a.obs LIKE '%".$CriterioBusqueda."%' group by id_docto  ";
 }
   $res=mysql_query($sql,Conectar::con());
   $count=mysql_num_rows($res);
@@ -157,7 +157,7 @@ echo  '<tbody>
 
 elseif($CriterioBusqueda!="" and $option1=='option3'){
   if($fecha1){
-$sql="SELECT b.id_mov,a.id_docto,c.nombre as destino,d.nombre as origen,a.name_docto,a.oficio,a.num_archive,a.num_gabeta,a.num_fila,concat(a.repository,a.archive) as url,b.henviado,b.hleido,a.asignado,a.obs,e.id_estado FROM archivos as a inner join movimientos as b on (a.id_docto=b.id_docto) left join departamentos as c on(b.destino=c.id) inner join departamentos as d on (b.origen=d.id) inner join estados as e on (e.id_estado=b.estado) where destino='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%' OR d.nombre LIKE '%".$CriterioBusqueda."%' and CAST(b.henviado as DATE) BETWEEN '".$fecha1."' AND '".$fecha2."')  ";
+$sql="SELECT b.id_mov,a.id_docto,c.nombre as destino,d.nombre as origen,a.name_docto,a.oficio,a.num_archive,a.num_gabeta,a.num_fila,concat(a.repository,a.archive) as url,b.henviado,b.hleido,a.asignado,a.obs,e.id_estado FROM archivos as a inner join movimientos as b on (a.id_docto=b.id_docto) left join departamentos as c on(b.destino=c.id) inner join departamentos as d on (b.origen=d.id) inner join estados as e on (e.id_estado=b.estado) where destino='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%' OR d.nombre LIKE '%".$CriterioBusqueda."%' OR a.obs LIKE '%".$CriterioBusqueda."%' and CAST(b.henviado as DATE) BETWEEN '".$fecha1."' AND '".$fecha2."')  ";
 }else{
 $sql="SELECT b.id_mov,a.id_docto,c.nombre as destino,d.nombre as origen,a.name_docto,a.oficio,a.num_archive,a.num_gabeta,a.num_fila,concat(a.repository,a.archive) as url,b.henviado,b.hleido,a.asignado,a.obs,e.id_estado FROM archivos as a inner join movimientos as b on (a.id_docto=b.id_docto) left join departamentos as c on(b.destino=c.id) inner join departamentos as d on (b.origen=d.id) inner join estados as e on (e.id_estado=b.estado) where destino='".$propietario."' and (oficio LIKE '%".$CriterioBusqueda."%' OR name_docto LIKE '%".$CriterioBusqueda."%' OR d.nombre LIKE '%".$CriterioBusqueda."%')  ";
 

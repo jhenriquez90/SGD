@@ -96,7 +96,10 @@ $ObtenerRestringir=$obj_1->getrestringir();
             </div>
             <input type="file" style="display:none;" id="mimg" name="mimg">
             <input type="button" value="Elegir Archivo PDF" onclick="document.getElementById('mimg').click();" class="btn btn-primary app-btnfile">
-            </div>            
+            </div> 
+            <div class="app-espacio">
+             <span id="peso" name="peso" class="alert" role="alert"></span> 
+          </div>           
           </div>
         <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
          <div class="col-xs-12 col-md-12 col-sm-8 col-lg-8">   

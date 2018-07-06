@@ -29,7 +29,7 @@ $ObtenerUnidades=$obj_1->getUnidades();
         <link rel="stylesheet" href="../css/bootstrap.min.css">
                 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/main.css">
-
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
@@ -60,6 +60,7 @@ $ObtenerUnidades=$obj_1->getUnidades();
                  <li class="dropdown"><a id="IN" class="app-navbar"  href="#">Ingresar Nuevo</a>
                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href=""> <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['nombre']."&nbsp".$_SESSION['apellido']; ?> <span class="caret Qs"></span></a>
               <ul class="dropdown-menu navbar-dropdown">
+                <li><a href="perfil">Mi Perfil</a></li>
               <li><a href="archivos">Archivos</a></li>
               <?php if($ObtenerRestringir[$p]['usuarios']==1){?>
                <li><a href="usuarios">Usuarios</a></li>

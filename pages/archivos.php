@@ -2,17 +2,20 @@
 require_once '../class/conexion.php';
 require_once("../class/obj_archivo.php");
 session_start();
-
+$_SESSION['estado'];
 if($_SESSION['user']=="")
 {
 header("location:../procesos/logout");
 } 
+
+
 $obj_1=new Tarchivos();
 $Obtenerenviados=$obj_1->getenviados();
 $Obtenernoti=$obj_1->getnoti();
 $Obtenerrecibidos=$obj_1->getrecibidos();
 $ObtenerArchivos=$obj_1->getArchivos();
 $ObtenerRestringir=$obj_1->getrestringir();
+$ObtenerSinArchivo=$obj_1->getSinArchivo();
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -32,10 +35,11 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <link rel="stylesheet" href="../css/bootstrap.min.css">
                 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/main.css">
-
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        
     </head>
-    <body>
+    <body >
     <?php  for ($p=0; $p <sizeof($ObtenerRestringir) ; $p++) { ?>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -45,7 +49,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <div id="logo">
          
         </div>
-        
+        <?php if($_SESSION['birthday']=="0000-00-00"){  ?><span class="alert alert-info app-position" role="alert"> Debes actualizar tu perfil en la <strong>"Fecha de Nacimiento"</strong> presiona <strong> <a href="perfil">Aqui!</a></strong> </span><?php } ?>
          <nav class="navbar navbar-personalizado">
         <div class="container">
           <div class="navbar-header">
@@ -98,7 +102,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <h3 class="app-head">DOCUMENTOS INGRESADOS AL SISTEMA</h3>
         <section id="notificaciones">
         
-   <a class="app-notificaciones" href="">No Leídos <span class="badge"></span></a>
+   <a class="app-notificaciones" href="">No Leídos <span class="badge badge1"></span></a>
    
 </section>
         <section id="busqueda">
@@ -106,7 +110,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
          <label>Búsqueda</label>             
              <div class="input-group">
-             <input data-toggle="tooltip" data-placement="bottom" title="Búsqueda por Nombre del Documento,Número de Oficio, Origen del documento"  class="form-control" type="text" id="search" name="search" placeholder="Búsqueda...">
+             <input data-toggle="tooltip" data-placement="bottom" title="Búsqueda por Nombre del Documento,Número de Oficio, Origen del documento"  class="form-control" type="text" id="search" name="search" placeholder="Búsqueda..." onkeyup="this.value=NumText(this.value)">
             <div id="btnsearch" class="btn input-group-addon btnsearch" for="search">Buscar</div>
             </div> 
 
@@ -182,13 +186,19 @@ $ObtenerRestringir=$obj_1->getrestringir();
           
         </section>
 
-
+<?php for($a=0; $a<sizeof($ObtenerSinArchivo); $a++){ ?>
+    <div class="app-count label label-default">
+       <h5> Registros Sin Archivos <a class="app-a" href="sinarchivo"><?php echo $ObtenerSinArchivo[$a]['Conteo']; ?></a> de  <?php echo $ObtenerSinArchivo[$a]['Total']; ?> </h5>    
+    </div>
+    <?php } ?>
 <section id="navegacion">
 <ul id="navega" class="nav nav-tabs">
 <li role="presentation" class="active"><a href="#MisArchivos" aria-controls="MisArchivos" role="tab" data-toggle="tab">Archivos</a></li>
  <li role="presentation"><a href="#tableArchivo" aria-controls="tableArchivo" role="tab" data-toggle="tab">Enviados</a></li>
     <li role="presentation"><a href="#recibidos" aria-controls="recibidos" role="tab" data-toggle="tab">Recibidos</a></li>
+ 
 </ul>
+   
 </section>
 
 
@@ -197,6 +207,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
 
 <section id="MisArchivos" class="tab-pane fade in active" role="tabpanel">
   <div class="row">
+   
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-table ">
         <table class="table table-bordered  ">
         <thead>
@@ -211,7 +222,6 @@ $ObtenerRestringir=$obj_1->getrestringir();
             <th>Usuario de Creación</th>  
             <th>Observación</th>
             <th>Archivo</th>    
-            
             </tr>
         </thead>
         
@@ -274,15 +284,12 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <thead>
         <tr>
             <th>Id</th>
-            <th>Origen del Documento</th>
             <th>Destinatario del Documento</th>
             <th>Nombre del Documento</th>
-            <th>Número de Oficio</th>
-            <th>Receptor</th>
+            <th>Número de Oficio</th>            
             <th>Estado</th>
             <th>Observación</th>
-            <th>Fecha que se Envió el documento</th>
-            <th>Fecha que Recibió el documento</th>
+            <th>Fecha de Envió</th>            
             <th>Respuestas</th>
             <th>Archivo</th>
             </tr>
@@ -294,15 +301,12 @@ $ObtenerRestringir=$obj_1->getrestringir();
 
 <tr>
     <td><?php echo $i; ?></td>
-    <td><?php echo $Obtenerenviados[$i]['origen']; ?></td>
     <td><?php echo $Obtenerenviados[$i]['destino']; ?></td>
     <td><?php echo $Obtenerenviados[$i]['name_docto']; ?></td>
-     <td><?php echo $Obtenerenviados[$i]['oficio']; ?></td>
-          <td><?php echo $Obtenerenviados[$i]['usuario']; ?></td>
+     <td><?php echo $Obtenerenviados[$i]['oficio']; ?></td>          
           <td><?php echo $Obtenerenviados[$i]['estado']; ?></td>
            <td><?php echo $Obtenerenviados[$i]['obs']; ?></td>
-            <td><?php echo $fecha=date("d/m/Y h:i:s",strtotime($Obtenerenviados[$i]['henviado']));  ?></td>
-            <td><?php echo $fecha=date("d/m/Y h:i:s",strtotime($Obtenerenviados[$i]['hleido']));  ?></td>
+            <td><?php echo $fecha=date("d/m/Y h:i:s",strtotime($Obtenerenviados[$i]['henviado']));  ?></td>            
             <td data="<?php echo $Obtenerenviados[$i]['id_docto']; ?>"><span class="ver glyphicon glyphicon-eye-open"></span></td>
             <td><a target="_blank" href="<?php echo $Obtenerenviados[$i]['url']?>"><img class="app-pdfimg" src="../img/pdf.png"></a></td>
             <td><div class="btn-group">
@@ -343,7 +347,6 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <tr>
             <th>Id</th>
             <th>Origen del Documento</th>
-            <th>Destinatario del Documento</th>
             <th>Nombre del Documento</th>
             <th>Número de Oficio</th>
             <th>Observación</th>
@@ -360,7 +363,6 @@ $ObtenerRestringir=$obj_1->getrestringir();
 <tr bgcolor="<?php if($colores==1) {echo '';}elseif($colores==2){ echo '#991a1a';}else{ echo '#166fa3';} ?>">
     <td><?php echo $i; ?></td>
     <td><?php echo $Obtenerrecibidos[$i]['origen']; ?></td>
-    <td><?php echo $Obtenerrecibidos[$i]['destino']; ?></td>
     <td><?php echo $Obtenerrecibidos[$i]['name_docto']; ?></td>
      <td><?php echo $Obtenerrecibidos[$i]['oficio']; ?></td>
             <td><?php echo $Obtenerrecibidos[$i]['obs']; ?></td>
@@ -402,7 +404,18 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <br>Derechos Reservados 2017
     </div>
 </footer>
-         
+         <script type="text/javascript">
+           function NumText(string){//solo letras y numeros
+    var out = '';
+    //Se añaden las letras validas
+    var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-# ';//Caracteres validos
+  
+    for (var i=0; i<string.length; i++)
+       if (filtro.indexOf(string.charAt(i)) != -1) 
+       out += string.charAt(i);
+    return out;
+}
+         </script>
         <script src="../js/vendor/jquery-1.11.2.min.js"></script>
 
         <script src="../js/vendor/bootstrap.min.js"></script>

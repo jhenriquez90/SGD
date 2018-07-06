@@ -13,6 +13,8 @@ private $restringir;
 private $archivos;
 private $unidades;
 private $detalle;
+private $SinArchivo;
+
 
 
 
@@ -28,6 +30,8 @@ public function __construct(){
 	$this->restringir=array();
 	$this->detalle=array();
 	$this->respuesta=array();
+	$this->SinArchivo=array();
+	
 }
 
 
@@ -78,6 +82,15 @@ while($reg = mysql_fetch_assoc($res)){
 		
 }
 
+public function getSinArchivo(){
+		$sql="SELECT count(repository) as Total, (Select count(repository) from archivos where propietario=".$_SESSION['departamento']." and repository='' ) as Conteo  FROM archivos where propietario=".$_SESSION['departamento']." ";
+$res=mysql_query($sql,Conectar::con());
+while($reg = mysql_fetch_array($res)){
+				$this->SinArchivo[] = $reg;
+			}
+			return $this->SinArchivo;
+		
+}
 public function getedit(){
 	$id=$_POST['id'];
 	$sql="select*from archivos where id_docto=$id";
@@ -102,7 +115,7 @@ while($reg = mysql_fetch_assoc($res)){
 
 public function getuser(){
 		
-	$sql="SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id)";
+	$sql="SELECT a.id,a.name,a.last_name,a.user,d.ncargo as permisos,b.nombre as unidades,c.nombre as departamentos,a.estado FROM login as a left join unidades as b on (a.unidad=b.id) left join departamentos as c on (a.departamento=c.id) left join permisos as d on (a.permisos=d.id)";
 $res=mysql_query($sql,Conectar::con());
 while($reg = mysql_fetch_assoc($res)){
 				$this->user[] = $reg;
@@ -130,7 +143,7 @@ while($reg = mysql_fetch_assoc($res)){
 
 public function getUnidades(){
 
-$sql="SELECT*FROM unidades";
+$sql="SELECT*FROM unidades order by nombre asc";
 $res=mysql_query($sql,Conectar::con());
 while($reg=mysql_fetch_assoc($res)){
 	$this->unidades[]=$reg;

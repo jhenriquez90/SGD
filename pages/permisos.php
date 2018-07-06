@@ -18,7 +18,9 @@ $ObtenerRestringir=$obj_1->getrestringir();
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Gestión y Control de Documentos</title>
+        <link rel="shortcut icon" href="../img/logo.png" />
+        <link rel="shortcut icon" href="../img/logo.png" type="image/png" />
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -26,7 +28,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/main.css">
-
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
@@ -46,7 +48,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
             <span class="icon-bar app-bar"></span>
             <span class="icon-bar app-bar"></span>
           </button>
-          <img id="logo" src="" >
+            <h1 class="app-h1"><?php echo $_SESSION['nameb']; ?> <br> <?php echo $_SESSION['namec'];?></h1>
           
           </div>
           <div class="collapse navbar-collapse" id="menu">
@@ -56,7 +58,7 @@ $ObtenerRestringir=$obj_1->getrestringir();
               
                  <li class="dropdown"><a id="Qs" class="dropdown-toggle" data-toggle="dropdown" href=""> <span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['nombre']."&nbsp".$_SESSION['apellido']; ?> <span class="caret Qs"></span></a>
               <ul class="dropdown-menu navbar-dropdown">
-              
+              <li><a href="perfil">Mi Perfil</a></li>
               <li><a href="archivos">Archivos</a></li>              
                <?php if($ObtenerRestringir[$p]['usuarios']==1){?>
                <li><a href="usuarios">Usuarios</a></li>

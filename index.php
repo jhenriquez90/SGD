@@ -1,6 +1,4 @@
 <?php
-require_once 'class/conexion.php';
-
 session_start();
 if (isset($_SESSION['user'])) {
 header("location:procesos/logout");
@@ -28,8 +26,10 @@ $_SESSION['user'] = "";
         <link rel="stylesheet" href="css/bootstrap.min.css">
                 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
-
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -68,7 +68,7 @@ $_SESSION['user'] = "";
   
     <label for="user" class="col-sm-2 col-lg-2 control-label">Usuario</label>
     <div class="col-xs-12 col-sm-4 col-md-6 col-lg-6">
-      <input type="text" class="form-control" id="user" name="user" placeholder="Usuario">
+      <input type="text" class="form-control" id="user" name="user" placeholder="Usuario" autofocus>
     </div>
   </div>
 

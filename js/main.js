@@ -1,9 +1,23 @@
 $(document).ready(function(){
 
+    
+
   $('#img_destino').attr('src','../img/upload.png').show();
  
    $('#mimg').change(function(){
    	$('#img_destino').attr('src','../img/pdf.png').show();
+   		var pesobyte=this.files[0].size;
+   	var pesokilobyte=parseFloat(pesobyte/1024)/100;
+   	var pesomb=parseInt(pesobyte/1024/1024);
+   	
+   	if(pesokilobyte<1){
+   	$('#peso').removeClass('alert-danger').addClass('alert-info').html('Tamaño del archivo '+pesokilobyte+'Kb');	
+   }else if(pesomb>25){
+   		$('#peso').removeClass('alert-info').addClass('alert-danger').html('El Tamaño del archivo es muy grande '+pesomb+'Mb');
+   }else{
+   	$('#peso').removeClass('alert-danger').addClass('alert-info').html('Tamaño del archivo '+pesomb+'Mb');
+   }
+   	
    });
   
 $(function () {
@@ -590,14 +604,15 @@ var id=$('#id').val();
     var user=$('#user').val();
     var psw=$('#psw').val();
     var confpsw=$('#confpsw').val();
-var dataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw;
-
-
+    var birthday=$('#birthday').val();
+var dataString='id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&psw='+psw+'&birthday='+birthday;
+var DataString= 'id='+id+'&name='+name+'&last_name='+last_name+'&user='+user+'&birthday='+birthday;
+ 
      if(psw=="" && confpsw==""){
        $.ajax({
       type:"POST",
       url:"../procesos/editmperfil",
-      data:dataString,
+      data:DataString,
       success:function(b){
         if(b==1){
            obtenerDialog('Nota',' Usuario fue editado');
@@ -700,7 +715,9 @@ type:"POST",
 url:"../procesos/envios",
 data:dataString,
 success:function(env){
-  if(env==1){
+  if(env==21){
+    obtenerDialog('Nota','Este Archivo ya a sido enviado al destinatario');
+  }else if(env==1){
     obtenerDialog('Nota','Su Archivo se envió a los destinatarios correctamente');
      $('#aceptar').on('click',function(){
           location.reload();
@@ -949,8 +966,35 @@ location.reload();
 });
 
 
+$('.logoutad').on('click',function(){
+var cargar=$('#modalDialog').html('<div class="app-load"><img src="../img/30.gif" /></div>');  
+var id=$(this).parent().attr('data');
+var DataString='id='+id;
+$.ajax({
+type:"POST",
+url:"../procesos/logoutad",
+data: DataString,
+success:function(resp){
+if(resp==1){
+obtenerDialog('Sesion','El cambio de estado de la Sesion a sido realizada con Exito');
+$('#aceptar').on('click',function(){
+location.reload();
+  });
+}else{
+obtenerDialog('Sesion','El cambio de estado de la Sesion no se pudo realizar');
+
+}
+
+}
+
+
+});
+});
+
+
+
 function actualizar(){
-$('.badge').fadeOut("slow").load('../procesos/alert').fadeIn("slow");
+$('.badge1').fadeOut("slow").load('../procesos/alert').fadeIn("slow");
 }
 setInterval(actualizar, 10000);
 
@@ -968,6 +1012,7 @@ setInterval(actualizar, 10000);
     });
 }
 setInterval(checkMsj,10000);*/
+
 
 /*Desarrollado por Jorge Henriquez en colaboracion con el Departamento de Desarrollo de Telemática */
 function obtenerDialog(Nota,Contenido){

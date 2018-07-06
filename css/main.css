@@ -9,7 +9,7 @@
 body{
 
 
-    font-family: "Roboto",Roboto-Regular,helvetica;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -28,6 +28,10 @@ background-image: -webkit-linear-gradient(top, #0670a3 10%,#0670a3 51%);
 border-radius: 1px;
 }
 ::-webkit-scrollbar-track {
+}
+.app-a{
+  text-decoration: none;
+  color: white;
 }
 .app-head{
 background-color: #0787c5 !important;
@@ -180,7 +184,7 @@ textarea{
   margin-top: 5px;
 
   padding-bottom: 0;
-  width: 1280px;
+  width: 1180px;
   height: auto;
   border: 1px #778899 solid;
   border-radius: 5px;
@@ -296,18 +300,76 @@ border-bottom-color:#2797cd;
   border-radius: 5px;
   box-shadow: 5px 5px 8px #708090;
 }
+.app-count{
+float: right;
+margin-top: 23px !important;
+}
+.app-badge{
+  background-color: #2797cd !important;
+}
+.app-total{
+  float: right;
+}
 
+.online{
+  background-color: #32c40d;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border:1px #196805 solid;
+}
+.offline{
+  background-color: #ce1804;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border:1px #751409 solid;
+}
+
+.app-panel{
+ border-color:#0787c5; 
+}
+
+.app-panel>.panel-heading{
+  color: #ffffff;
+  background-color: #0787c5;
+}
+.app-position{
+  position: fixed;
+  z-index: 100 !important;
+  top: 40%;
+  left: 30%;
+}
+.app-espacio{
+	padding-top: 5px;
+	padding-bottom: 20px;
+}
 /*Media Queries*/
 
 @media only screen and (max-width: 640px) {
+.panel-heading{
+  height: 50px !important;
+ }
+ .panel-title{
+  font-size: 15px !important;
+ }
+
+.app-total{
+  font-size: 15px !important;
+}
+
+
 .app-table{
   overflow-x: scroll;
   width: 31%;
 }
 
-}
-
-@media only screen and (max-width: 640px) {
 .app-head{
 background-color: #0787c5 !important;
   color: white;
@@ -320,8 +382,6 @@ background-color: #0787c5 !important;
   border-radius: 3px;
   margin-bottom: 25px; 
 }
-}
-@media only screen and (max-width: 640px) {
 #TSearch{
   margin-top: 5px;
 overflow-x: scroll;
@@ -332,4 +392,6 @@ overflow-x: scroll;
   border-radius: 5px;
   box-shadow: 5px 5px 8px #708090; 
 }
+
 }
+

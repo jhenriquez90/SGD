@@ -6,7 +6,7 @@ session_start();
 $sql="SELECT a.id as iddepto, a.nombre, a.idunidades, b.id
 FROM departamentos AS a
 INNER JOIN unidades AS b ON ( a.idunidades = b.id ) 
-WHERE a.idunidades =$id";
+WHERE a.idunidades =$id order by a.nombre";
 $res=mysql_query($sql,Conectar::con());
 $conteo=mysql_num_rows($res);
 

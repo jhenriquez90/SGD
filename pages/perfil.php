@@ -33,7 +33,7 @@ $res=mysql_query($sql,Conectar::con());
         <link rel="stylesheet" href="../css/bootstrap.min.css">
                 <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/main.css">
-
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
@@ -113,6 +113,14 @@ $res=mysql_query($sql,Conectar::con());
   <label for="user">Usuario</label>
   <span name="user" id="user" class="form-control"><?php echo $row['user']; ?></span>
   </div>
+  <div class="form-group">
+    <label for="birthday">Fecha de Nacimiento</label>
+    <?php if($row['birthday']=="0000-00-00"){ ?>
+    <input type="date" class="form-control" name="birthday" id="birthday">
+    <?php }elseif($row['birthday']!="0000-00-00"){ ?>
+    <span class="form-control"><?php echo date("d/m/Y",strtotime($row['birthday'])); ?></span>
+    <?php }?>
+  </div>
 <div class="form-group">
 <label for="psw">Contraseña</label>
   <input class="form-control" type="password" id="psw" >
@@ -123,8 +131,12 @@ $res=mysql_query($sql,Conectar::con());
 </div>
 <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>">
 
-<button class="btn btn-primary" id="mperfiledit" name="mperfiledit">Editar</button>
+<button class="btn btn-primary" id="mperfiledit" name="mperfiledit"> <span class="glyphicon glyphicon-refresh"></span> Actualizar</button>
   <?php endwhile; ?>
+  </div>
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <img src="../img/icon-user.png" class="img-responsive img-rounded" style="width: 350px;height: 350px;">
+    
   </div>
 </div> <!-- /container -->
 </div>   
