@@ -6,6 +6,18 @@ $(document).ready(function(){
  
    $('#mimg').change(function(){
    	$('#img_destino').attr('src','../img/pdf.png').show();
+   		var pesobyte=this.files[0].size;
+   	var pesokilobyte=parseFloat(pesobyte/1024)/100;
+   	var pesomb=parseInt(pesobyte/1024/1024);
+   	
+   	if(pesokilobyte<1){
+   	$('#peso').removeClass('alert-danger').addClass('alert-info').html('Tamaño del archivo '+pesokilobyte+'Kb');	
+   }else if(pesomb>25){
+   		$('#peso').removeClass('alert-info').addClass('alert-danger').html('El Tamaño del archivo es muy grande '+pesomb+'Mb');
+   }else{
+   	$('#peso').removeClass('alert-danger').addClass('alert-info').html('Tamaño del archivo '+pesomb+'Mb');
+   }
+   	
    });
   
 $(function () {
